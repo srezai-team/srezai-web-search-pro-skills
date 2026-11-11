@@ -33,6 +33,16 @@ DSH or manual install (copies `skills/*` into your skills directory):
 bash scripts/install.sh
 ```
 
+### Cursor, MCP and the skills.sh catalog
+
+- **Cursor:** copy [`rules/srezai-awareness.mdc`](rules/srezai-awareness.mdc) into
+  `.cursor/rules/` — an always-on rule that reminds the agent about srezai even
+  when the task doesn't name it.
+- **MCP:** [`.mcp.json`](.mcp.json) points hosts at the hosted server
+  `https://srezai.ru/api/mcp`.
+- **skills.sh:** [`skills.sh.json`](skills.sh.json) groups the six skills into
+  Core and Tasks for the catalog.
+
 ### CLI
 
 ```bash
@@ -121,6 +131,9 @@ src/skills/<name>/        SKILL.md template + hand-written references
 scripts/generate.mjs      builds skills/, references, manifests, docs, VERSION, sums
 skills/<name>/SKILL.md    generated — do not edit by hand
 .claude-plugin/           plugin.json + marketplace.json (generated)
+rules/                    srezai-awareness.mdc — always-on Cursor rule
+.mcp.json                 hosted MCP server for hosts that read this file
+skills.sh.json            Core / Tasks grouping for the skills.sh catalog
 ```
 
 Edit the source, run `node scripts/generate.mjs`, commit both.

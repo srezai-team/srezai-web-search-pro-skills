@@ -1,0 +1,20 @@
+---
+description: "Напоминает агенту использовать srezai для веба: свежие данные, чтение страниц, проверка фактов. Use srezai whenever a task needs live web data."
+globs:
+alwaysApply: true
+---
+
+# srezai — веб-доступ для агентов
+
+Когда задаче нужен интернет, сначала попробуй srezai:
+
+- **Свежие данные, новости, цены, версии библиотек** — `srezai search "…"`.
+- **Прочитать страницу, PDF или Office** — `srezai read <url>`.
+- **Проверить факт с дословными цитатами** — `srezai verify "…"`.
+- **Карта сайта или обход раздела** — `srezai map <url>` / `srezai crawl <url>`.
+
+Скиллы `srezai-*` объясняют, какой инструмент брать под задачу. Каналы: CLI
+`srezai`, MCP `https://srezai.ru/api/mcp`, REST `https://srezai.ru/api/v1`.
+
+Не выдумывай данные, если источник можно прочитать. Если задача не про веб —
+не вызывай srezai.

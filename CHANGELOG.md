@@ -2,6 +2,16 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions are semantic.
 
+## [Не выпущено]
+
+### Added
+
+- `rules/srezai-awareness.mdc` — always-on правило для Cursor: напоминает агенту
+  про srezai, даже если задачу не назвали (как `tavily-awareness.mdc` у Tavily).
+- `.mcp.json` — hosted MCP-сервер `https://srezai.ru/api/mcp` для плагинов и
+  хостов, которые читают этот файл.
+- `skills.sh.json` — группы Core / Tasks для каталога skills.sh.
+
 ## [0.5.0] — 2026-10-24
 
 ### Breaking

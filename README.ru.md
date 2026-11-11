@@ -32,6 +32,16 @@ DSH или ручная установка (копирует `skills/*` в ка�
 bash scripts/install.sh
 ```
 
+### Cursor, MCP и каталог skills.sh
+
+- **Cursor:** скопируйте [`rules/srezai-awareness.mdc`](rules/srezai-awareness.mdc)
+  в `.cursor/rules/` — правило с пометкой «применять всегда» напоминает агенту
+  про srezai, даже если задачу не назвали.
+- **MCP:** [`.mcp.json`](.mcp.json) подключает hosted-сервер
+  `https://srezai.ru/api/mcp`.
+- **skills.sh:** [`skills.sh.json`](skills.sh.json) раскладывает шесть скиллов
+  на группы Core и Tasks для каталога.
+
 ### CLI
 
 ```bash
