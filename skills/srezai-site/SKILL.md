@@ -62,6 +62,12 @@ srezai crawl https://docs.example.com --select-paths /api/ --limit 10
 3. Если нужен лишь список адресов — `map` дешевле: `crawl` платит за каждую
    прочитанную страницу.
 
+## Русские сайты: что реально читается
+
+Проверенные 15.11.2026 рецепты по Avito, Ozon, Wildberries, hh, Habr, Kwork,
+Госуслугам — в [references/sites.md](references/sites.md). Там же — какие сайты
+не отдаются и что делать вместо повтора той же ссылки.
+
 ## Правила
 
 - `crawl --search` фильтрует по **тексту** прочитанных страниц, `--select-paths`
