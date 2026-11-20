@@ -1,6 +1,6 @@
 {
   "name": "srezai-skills",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты сайтов, извлечение по схеме, проверка фактов, готовые ответы и глубокие исследования.",
   "author": {
     "name": "srezai",
@@ -24,6 +24,9 @@
     "./skills/srezai-read",
     "./skills/srezai-site",
     "./skills/srezai-research",
-    "./skills/srezai-transcript"
+    "./skills/srezai-transcript",
+    "./skills/srezai-build",
+    "./skills/srezai-migrate",
+    "./skills/srezai-eval"
   ]
 }

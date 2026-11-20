@@ -2,15 +2,65 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions are semantic.
 
-## [Не выпущено]
+## [0.6.0] — 2026-11-20
+
+Операционные правила, три скилла-руководства, мультихарнесс-поставка и
+воспроизводимый harness оценки. Разбор конкурентов, из которого это выросло:
+`research/competitor-skills-analysis-2026-11-20.md`.
 
 ### Added
 
+- **`srezai-build`** (guide) — встроить srezai в код: выбор канала, ключ, ошибки по
+  `code`, идемпотентность, лимиты, примеры Node/Python/curl/MCP, чек-лист перед
+  релизом. References: `integration.md`, `examples.md`, `checklist.md`.
+- **`srezai-migrate`** (guide) — переезд с Tavily / Firecrawl / Exa / SerpAPI: таблица
+  соответствия инструментов, потерянные функции, grep остатков, проверка после
+  переезда. References: `mapping.md`, `checklist.md`.
+- **`srezai-eval`** (guide, **user-invocable**) — методика воспроизводимой оценки:
+  датасет, манифест, ≥3 прогона, судья, p50/p95, учёт фейлов и цена.
+  References: `dataset-and-manifest.md`, `metrics-and-report.md`.
+- **`scripts/eval/`** — запускаемый harness: `positions.json` (25 позиций, en/ru/zh),
+  `run.mjs` (dry-run по умолчанию, `--live`, `--repeats`, `--max-credits`,
+  артефакты прогона, p50/p95, стоимость), `grade.mjs` (лист судьи CSV → `grades.json`,
+  пересборка отчёта), `test-dry-run.sh`, README с разделом «Ограничения метода».
+- **Операционные разделы в существующих скиллах**:
+  - `srezai-research`: verify-first (проверка **до** текста), «Когда остановиться»,
+    контракт цитат, новый `references/research-workflow.md` — пять шагов, Failure
+    Recovery по кодам, шаблон вывода.
+  - `srezai-web`: «Бюджет до вызова, а не после» (`get_usage`, потолок на задачу),
+    «Ошибки: деградировать, а не падать», `references/security.md` — канонический
+    файл про untrusted-контент, на который ссылаются все скиллы.
+  - `srezai-read`: дисциплина больших результатов — окна по `offset`, проверка
+    `truncated`/`skipped[]` перед выводом о полноте.
+  - `srezai-site`: критерий «Done when» и «обход не гарантирован».
+  - `srezai-search`, `srezai-transcript`: «Когда остановиться» / «Не для этого» и
+    связка «утверждение из видео → таймкод → verify».
+- **Мультихарнесс-поставка** (генерируется): `.codex-plugin/plugin.json`,
+  `.cursor-plugin/plugin.json`, `gemini-extension.json`. Плюс `manifest.json` с
+  SHA-256 каждого скилла и `AGENTS.md` / `CLAUDE.md` — инструкции для агентов,
+  работающих с этим репозиторием.
 - `rules/srezai-awareness.mdc` — always-on правило для Cursor: напоминает агенту
   про srezai, даже если задачу не назвали (как `tavily-awareness.mdc` у Tavily).
 - `.mcp.json` — hosted MCP-сервер `https://srezai.ru/api/mcp` для плагинов и
   хостов, которые читают этот файл.
-- `skills.sh.json` — группы Core / Tasks для каталога skills.sh.
+- `skills.sh.json` — группы Core / Tasks / Guides для каталога skills.sh.
+
+### Changed
+
+- Генератор поддерживает `kind: "guide"`: скилл без собственных инструментов
+  (шаблон не может использовать `TOOLS_SUMMARY`/`TOOL_DETAILS`/`CLI_EXAMPLE`).
+- `user_invocable: true` в `src/skills.json` добавляет в frontmatter
+  `disable-model-invocation: true` — такой скилл вызывает человек, а не модель
+  (использовано для `srezai-eval`, чтобы методика не грузилась в контекст каждый ход).
+- Бюджеты: `skill_md_chars` 3830 → 4600 (нужны операционные разделы),
+  `descriptions_chars` 1860 → 2600 (три новых скилла), новый гейт
+  `extra_reference_chars` 8200 — ручные справочники тоже ограничены.
+- `skills.sh.json` и описания: добавлены триггеры «сколько потрачу кредитов»,
+  «проверь до текста», «страница не влезла», «цитата из видео».
+- CI: проверка группировки `skills.sh.json`, JSON всех манифестов и соответствия
+  `manifest.json` файлам `skills/`, прогон `scripts/eval/test-dry-run.sh`.
+  `selftest.sh` теперь проверяет все относительные ссылки (включая кросс-скилловые)
+  и сами манифесты.
 
 ## [0.5.0] — 2026-10-24
 

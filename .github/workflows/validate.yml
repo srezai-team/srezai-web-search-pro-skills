@@ -23,8 +23,29 @@ jobs:
       - name: Артефакты совпадают с src/tools.json
         run: node scripts/generate.mjs --check
 
-      - name: Самопроверка пакета (секреты, LF, frontmatter, суммы, ссылки)
+      - name: Самопроверка пакета (секреты, LF, frontmatter, суммы, ссылки, манифесты)
         run: bash scripts/selftest.sh
+
+      # Каталог skills.sh группирует скиллы по именам: опечатка ломает витрину.
+      - name: Группировка skills.sh ссылается на существующие скиллы
+        run: |
+          node - <<'NODE'
+          const { readFileSync, existsSync } = require("node:fs");
+          const path = require("node:path");
+          const groups = JSON.parse(readFileSync("skills.sh.json", "utf8"));
+          const missing = [];
+          for (const group of groups.groupings ?? []) {
+            for (const skill of group.skills ?? []) {
+              if (!existsSync(path.join("skills", skill, "SKILL.md"))) missing.push(`${group.title} → ${skill}`);
+            }
+          }
+          if (missing.length) throw new Error("skills.sh.json: неизвестные скиллы:\n  " + missing.join("\n  "));
+          console.log(`✓ группировка skills.sh: ${(groups.groupings ?? []).length} групп`);
+          NODE
+
+      # Harness используется в методике оценки: dry-run должен проходить без ключа и сети.
+      - name: Eval-harness, dry-run без ключа
+        run: bash scripts/eval/test-dry-run.sh
 
       # tools/list отвечает и анонимно (проверено 07.10.2026: 12 инструментов без ключа),
       # поэтому секрет не обязателен. Задан SRZ_API_KEY — сверка идёт под ключом.

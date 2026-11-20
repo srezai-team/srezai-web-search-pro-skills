@@ -5,7 +5,7 @@
 Runet-first coverage, PDF, screenshots, site crawls, schema extraction, claim
 verification with quotes, synthesized answers and deep research.
 
-## Skills (6 narrow skills, Apache-2.0)
+## Skills (9 narrow skills, Apache-2.0)
 
 ```bash
 npx skills add srezai-team/srezai-web-search-pro-skill
@@ -17,6 +17,9 @@ npx skills add srezai-team/srezai-web-search-pro-skill
 - srezai-site: карта сайта и обход раздела
 - srezai-research: проверить факт, собрать ответ, исследовать тему
 - srezai-transcript: субтитры и текст видео YouTube
+- srezai-build: встроить srezai в код продукта
+- srezai-migrate: переезд с другого провайдера на srezai
+- srezai-eval: воспроизводимая оценка качества поиска
 
 ## Tools
 
@@ -34,4 +37,4 @@ npx skills add srezai-team/srezai-web-search-pro-skill
 - yt_srt: YouTube video text: transcripts, summaries, quotes. Price: 1 credit per video; 15 with speaker labeling.
 - get_usage: Check balance, remaining quota, spend and the price list. Price: free; does not use the quota.
 
-Generated from src/tools.json v0.5.0.
+Generated from src/tools.json v0.6.0.

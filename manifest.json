@@ -1,0 +1,115 @@
+{
+  "name": "srezai-skills",
+  "version": "0.6.0",
+  "repository": "https://github.com/srezai-team/srezai-web-search-pro-skill",
+  "license": "Apache-2.0",
+  "generated_from": [
+    "src/tools.json",
+    "src/skills.json",
+    "src/skills/*/SKILL.md.tpl"
+  ],
+  "designed_for": {
+    "claude_code": ".claude-plugin/plugin.json",
+    "codex": ".codex-plugin/plugin.json",
+    "cursor": ".cursor-plugin/plugin.json",
+    "gemini_cli": "gemini-extension.json",
+    "any_agent": "skills/*/SKILL.md"
+  },
+  "counts": {
+    "skills": 9,
+    "tools": 13
+  },
+  "skills": [
+    {
+      "name": "srezai-web",
+      "path": "./skills/srezai-web",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "get_usage"
+      ],
+      "sha256": "a6951ce227ae948adb9c336eefeb7745ca40ab40029d4e1ae2f5f811c74659bf"
+    },
+    {
+      "name": "srezai-search",
+      "path": "./skills/srezai-search",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "web_search",
+        "image_search"
+      ],
+      "sha256": "d2137372fc483c066e21d79ec63e316b85a5b28194b182e8fc8d2ee1ca8d4c52"
+    },
+    {
+      "name": "srezai-read",
+      "path": "./skills/srezai-read",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "read_url",
+        "read_urls",
+        "extract",
+        "fetch_page"
+      ],
+      "sha256": "6f0b3447fd0305ff5427766e5470f47056f542073b63b86be04e90ceb9d8420f"
+    },
+    {
+      "name": "srezai-site",
+      "path": "./skills/srezai-site",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "map",
+        "crawl"
+      ],
+      "sha256": "18063ed0d1aa42253ebd1b44377a3557ddd4a9e76a18b39d46b4db6bdc349b14"
+    },
+    {
+      "name": "srezai-research",
+      "path": "./skills/srezai-research",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "verify_claim",
+        "answer_search",
+        "deep_research"
+      ],
+      "sha256": "a66d8c9f49a98fdb6dc230ee3c2975ee1be348a9e5359051a80df78f744dfd82"
+    },
+    {
+      "name": "srezai-transcript",
+      "path": "./skills/srezai-transcript",
+      "kind": "toolset",
+      "user_invocable": false,
+      "tools": [
+        "yt_srt"
+      ],
+      "sha256": "1218cb010a5df9761f204a298bc22f54e02b87ca41addbef1955d736f64a032d"
+    },
+    {
+      "name": "srezai-build",
+      "path": "./skills/srezai-build",
+      "kind": "guide",
+      "user_invocable": false,
+      "tools": [],
+      "sha256": "fd3bf169718665927688bd79075b306e823031758800c6e40eb02f4f50c66cce"
+    },
+    {
+      "name": "srezai-migrate",
+      "path": "./skills/srezai-migrate",
+      "kind": "guide",
+      "user_invocable": false,
+      "tools": [],
+      "sha256": "eb5263c800c1de7b27912a00371772fb5e813165c268e9c145d6b139b1dbde02"
+    },
+    {
+      "name": "srezai-eval",
+      "path": "./skills/srezai-eval",
+      "kind": "guide",
+      "user_invocable": true,
+      "tools": [],
+      "sha256": "9a3939681efeabd0d630ea5664ce22a0963ad8bf73ac25c7b8a058c2e239cd6c"
+    }
+  ]
+}
