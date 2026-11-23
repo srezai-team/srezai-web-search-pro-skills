@@ -68,4 +68,4 @@ srezai transcript https://youtu.be/ID --languages ru --timestamps
 
 ## Версия
 
-Скиллы 0.6.1.
+Скиллы 0.6.2.

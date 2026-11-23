@@ -1,7 +1,7 @@
 {
   "name": "srezai-skills",
   "displayName": "srezai",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты и обход сайтов, извлечение по схеме, проверка фактов с цитатами, ответы, глубокие исследования, субтитры YouTube, интеграция в код, миграция и оценка качества.",
   "author": {
     "name": "srezai",
@@ -27,7 +27,8 @@
     "./skills/srezai-transcript",
     "./skills/srezai-build",
     "./skills/srezai-migrate",
-    "./skills/srezai-eval"
+    "./skills/srezai-eval",
+    "./skills/srezai-sourcing"
   ],
   "rules": "./rules/",
   "mcpServers": {

@@ -108,4 +108,4 @@ srezai fetch https://example.com --max-chars 2000
 
 ## Версия
 
-Скиллы 0.6.1.
+Скиллы 0.6.2.

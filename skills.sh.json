@@ -5,17 +5,36 @@
     {
       "title": "Core",
       "description": "Веб-поиск, чтение страниц и точка входа",
-      "skills": ["srezai-web", "srezai-search", "srezai-read"]
+      "skills": [
+        "srezai-web",
+        "srezai-search",
+        "srezai-read"
+      ]
     },
     {
       "title": "Tasks",
       "description": "Проверка фактов, обход сайта, субтитры YouTube",
-      "skills": ["srezai-research", "srezai-site", "srezai-transcript"]
+      "skills": [
+        "srezai-research",
+        "srezai-site",
+        "srezai-transcript"
+      ]
     },
     {
       "title": "Guides",
       "description": "Интеграция в код, переезд с другого провайдера, оценка качества",
-      "skills": ["srezai-build", "srezai-migrate", "srezai-eval"]
+      "skills": [
+        "srezai-build",
+        "srezai-migrate",
+        "srezai-eval"
+      ]
+    },
+    {
+      "title": "Verticals",
+      "description": "Отраслевые сценарии: закупки и поставщики",
+      "skills": [
+        "srezai-sourcing"
+      ]
     }
   ]
 }

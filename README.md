@@ -1,12 +1,12 @@
 # srezai skills — web access for AI agents, without burning the context
 
-Nine skills plus a zero-dependency CLI for the [srezai](https://srezai.ru) web API:
+Ten skills plus a zero-dependency CLI for the [srezai](https://srezai.ru) web API:
 six tool skills (web search, page reading, site maps and crawls, schema-based extraction,
 claim verification with quotes, answers, deep research, YouTube transcripts) and three
 guide skills (integration, migration, evaluation). Runet-first coverage.
 
 **Why skills + CLI.** An MCP server sends every tool schema in every request — for
-srezai that is ≈10.8k tokens (13 tools + instructions). These nine skill descriptions
+srezai that is ≈10.8k tokens (13 tools + instructions). These ten skill descriptions
 cost **≈730 tokens total** (o200k), and the CLI keeps tool schemas out of the context
 window: a typical task reads one skill (≈700–1,200 tokens) and one reference
 (≈300 tokens). MCP stays for hosts that have no shell: Claude Desktop, ChatGPT
@@ -45,7 +45,7 @@ bash scripts/install.sh
   when the task doesn't name it.
 - **MCP:** [`.mcp.json`](.mcp.json) points hosts at the hosted server
   `https://srezai.ru/api/mcp`.
-- **skills.sh:** [`skills.sh.json`](skills.sh.json) groups the nine skills into
+- **skills.sh:** [`skills.sh.json`](skills.sh.json) groups the ten skills into
   Core, Tasks and Guides for the catalog.
 - **Integrity:** [`manifest.json`](manifest.json) lists every skill with its SHA-256,
   so an installed copy can be compared with the published one.
@@ -80,6 +80,7 @@ starter credits and returns the key once plus a no-login top-up link.
 | `srezai-site` | "what pages does this site have", "crawl this section" | `map`, `crawl` |
 | `srezai-research` | "check this claim", "give me an answer", "research this topic" | `verify_claim`, `answer_search`, `deep_research` |
 | `srezai-transcript` | "subtitles", "what is said in this video" | `yt_srt` |
+| `srezai-sourcing` | "find suppliers/factories in China", 1688, MOQ, FOB | — |
 | `srezai-build` | "put srezai in our backend / SDK / agent", integration and release checks | — |
 | `srezai-migrate` | "move us off Tavily / Firecrawl / Exa / SerpAPI" | — |
 | `srezai-eval` | "measure and compare search quality" — user-invoked: run it explicitly | — |
@@ -170,7 +171,7 @@ method's limits are written down, not implied — see
 
 ```
 src/tools.json            single source of truth for tools, prices, CLI examples
-src/skills.json           nine skills: kind, descriptions, tool mapping, budgets
+src/skills.json           ten skills: kind, descriptions, tool mapping, budgets
 src/skills/<name>/        SKILL.md template + hand-written references
 scripts/generate.mjs      builds skills/, references, manifests, docs, VERSION, sums
 scripts/eval/             reproducible quality harness (dry-run by default)

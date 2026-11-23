@@ -75,4 +75,4 @@ disable-model-invocation: true
 
 ## Версия
 
-Скиллы 0.6.1.
+Скиллы 0.6.2.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "budget": {
-    "descriptions_chars": 3000,
+    "descriptions_chars": 3300,
     "skill_md_chars": 4600,
     "reference_chars": 4800,
     "extra_reference_chars": 8200
@@ -98,6 +98,14 @@
       "description": "Воспроизводимая оценка качества поиска: датасет, манифест, ≥3 прогона, судья, p50/p95, учёт фейлов, отчёт «качество × цена × латентность». Вызывается человеком. Триггеры: «бенчмарк», «bake-off», «сравни провайдеров». English: search evaluation, benchmark, bake-off.",
       "tools": [],
       "order": 8
+    },
+    {
+      "name": "srezai-sourcing",
+      "kind": "guide",
+      "title": "srezai-sourcing — поставщики и закупки в Китае",
+      "description": "Поставщики и закупки в Китае: поиск фабрик и рынков (1688, Alibaba, Yiwu, Гуанчжоу), карточка поставщика по схеме (MOQ, FOB, адрес, контакты), проверка юрлица и адреса, чек-лист отбора. English: China supplier search, sourcing, factory finder, 1688, Alibaba.",
+      "tools": [],
+      "order": 9
     }
   ]
 }

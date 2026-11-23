@@ -1,6 +1,6 @@
 {
   "name": "srezai-skills",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Web search, page reading, site maps and crawls, schema extraction, claim verification with quotes, answers, deep research and YouTube transcripts for Gemini CLI via the srezai hosted MCP server and skills.",
   "mcpServers": {
     "srezai": {

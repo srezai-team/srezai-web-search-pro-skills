@@ -95,4 +95,4 @@ srezai crawl https://docs.example.com --select-paths /api/ --limit 10
 
 ## Версия
 
-Скиллы 0.6.1.
+Скиллы 0.6.2.
