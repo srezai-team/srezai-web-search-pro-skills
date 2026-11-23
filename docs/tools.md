@@ -1,6 +1,6 @@
 # Инструменты srezai — справочник
 
-> Сгенерировано из `src/tools.json` (версия 0.6.2, 2026-11-23). Руками не править:
+> Сгенерировано из `src/tools.json` (версия 0.6.3, 2026-11-23). Руками не править:
 > правка источника + `node scripts/generate.mjs`.
 
 MCP: `https://srezai.ru/api/mcp` · REST: `https://srezai.ru` · доки: https://srezai.ru/docs/mcp

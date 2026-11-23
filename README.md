@@ -17,13 +17,13 @@ connectors, n8n.
 ### Skills (any agent that reads `SKILL.md`)
 
 ```bash
-npx skills add srezai-team/srezai-web-search-pro-skill
+npx skills add srezai-team/srezai-web-search-pro-skills
 ```
 
 Claude Code plugin:
 
 ```bash
-/plugin marketplace add srezai-team/srezai-web-search-pro-skill
+/plugin marketplace add srezai-team/srezai-web-search-pro-skills
 /plugin install srezai-skills@srezai-skills
 ```
 
@@ -80,7 +80,7 @@ starter credits and returns the key once plus a no-login top-up link.
 | `srezai-site` | "what pages does this site have", "crawl this section" | `map`, `crawl` |
 | `srezai-research` | "check this claim", "give me an answer", "research this topic" | `verify_claim`, `answer_search`, `deep_research` |
 | `srezai-transcript` | "subtitles", "what is said in this video" | `yt_srt` |
-| `srezai-sourcing` | "find suppliers/factories in China", 1688, MOQ, FOB | — |
+| `srezai-china-sourcing` | "find suppliers/factories in China", 1688, MOQ, FOB | — |
 | `srezai-build` | "put srezai in our backend / SDK / agent", integration and release checks | — |
 | `srezai-migrate` | "move us off Tavily / Firecrawl / Exa / SerpAPI" | — |
 | `srezai-eval` | "measure and compare search quality" — user-invoked: run it explicitly | — |

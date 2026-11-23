@@ -21,7 +21,7 @@ allowed-tools: Bash(srezai *)
 | [`srezai-build`](../srezai-build/SKILL.md) | встроить srezai в код продукта |
 | [`srezai-migrate`](../srezai-migrate/SKILL.md) | переезд с другого провайдера на srezai |
 | [`srezai-eval`](../srezai-eval/SKILL.md) | воспроизводимая оценка качества поиска |
-| [`srezai-sourcing`](../srezai-sourcing/SKILL.md) | поставщики и закупки в Китае |
+| [`srezai-china-sourcing`](../srezai-china-sourcing/SKILL.md) | поставщики и закупки в Китае |
 
 ## Три канала — один и тот же API
 
@@ -86,4 +86,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.2. CLI `srezai` 0.1.1+; если старее — `npx srezai-cli@latest` (0.1.1 представляет серверу X-Client: по нему видно, каким скиллом сделан вызов).
+Скиллы 0.6.3. CLI `srezai` 0.1.1+; если старее — `npx srezai-cli@latest` (0.1.1 представляет серверу X-Client: по нему видно, каким скиллом сделан вызов).

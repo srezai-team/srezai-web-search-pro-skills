@@ -31,4 +31,4 @@ MCP: `answer_search` · REST: `POST https://srezai.ru/api/v1/*` с Bearer-клю
 
 Скилл: [../SKILL.md](../SKILL.md) · оглавление: [../../../docs/tools.md](../../../docs/tools.md).
 
-<!-- сгенерировано из src/tools.json v0.6.2 (2026-11-23); руками не править -->
+<!-- сгенерировано из src/tools.json v0.6.3 (2026-11-23); руками не править -->

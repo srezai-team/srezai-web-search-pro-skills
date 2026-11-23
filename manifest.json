@@ -1,7 +1,7 @@
 {
   "name": "srezai-skills",
-  "version": "0.6.2",
-  "repository": "https://github.com/srezai-team/srezai-web-search-pro-skill",
+  "version": "0.6.3",
+  "repository": "https://github.com/srezai-team/srezai-web-search-pro-skills",
   "license": "Apache-2.0",
   "generated_from": [
     "src/tools.json",
@@ -28,7 +28,7 @@
       "tools": [
         "get_usage"
       ],
-      "sha256": "d2399deffae9fc9c089b5a3e5900301c1c8ccddec7f004715b2dbd5ee99823a5"
+      "sha256": "a5d4cb772cd0799352031372b4abcbc60390ed994a0ce6e46b73cc68c2e6c6ad"
     },
     {
       "name": "srezai-search",
@@ -39,7 +39,7 @@
         "web_search",
         "image_search"
       ],
-      "sha256": "f5639440d519af4cd444376dfb317a2c60d22523cf0a0f4aa0a0fdfdfec76966"
+      "sha256": "99c04e7af784308450d25af12ccdd3e0ec4d286f6652829acb9650dcfe5410a2"
     },
     {
       "name": "srezai-read",
@@ -52,7 +52,7 @@
         "extract",
         "fetch_page"
       ],
-      "sha256": "7053971eb4dc030595ad42e466c9768aa326179f1085709a2642d39611fed23d"
+      "sha256": "f1c89b4846ccdd8d7354d64f8ce321181f840d09b0ef0d57d532c6570ed590c1"
     },
     {
       "name": "srezai-site",
@@ -63,7 +63,7 @@
         "map",
         "crawl"
       ],
-      "sha256": "94fbe3e5a264901b8842cae4baff5db1aedca9d3a90f41a69ccfecea9f2f13df"
+      "sha256": "4ebb6e6938ea5f5147064d762540cd7a6bd5c318951d4dafe6b29e139801e59f"
     },
     {
       "name": "srezai-research",
@@ -75,7 +75,7 @@
         "answer_search",
         "deep_research"
       ],
-      "sha256": "b4accdddd99855a63b58e7044b96b817ce49403afa442a00ca6700c764843524"
+      "sha256": "95e5d3a3b6433052e5a439853dee888d4a803b567ab2c1095d850ac7cc62b7db"
     },
     {
       "name": "srezai-transcript",
@@ -85,7 +85,7 @@
       "tools": [
         "yt_srt"
       ],
-      "sha256": "56fab0f710aff27222153fc6d58ede68543b6424b5f81eaf368bc9b8a22c4cdd"
+      "sha256": "ce86f2e2734c6b51c142c7dc44dfcbcc61096cfd379566bc3417646d29d8d597"
     },
     {
       "name": "srezai-build",
@@ -93,7 +93,7 @@
       "kind": "guide",
       "user_invocable": false,
       "tools": [],
-      "sha256": "ef96d7a57a26b1cfd1f079f96e677716b04d124b4805c9d0bb49becf5ebf777b"
+      "sha256": "c22dca4e07b71b99d66bc06a65ba0cccc73f22fb2dda332ad595b1b11a318345"
     },
     {
       "name": "srezai-migrate",
@@ -101,7 +101,7 @@
       "kind": "guide",
       "user_invocable": false,
       "tools": [],
-      "sha256": "c64f0b85a4c9a1872655a2e5b9fbaef718c742156188fcd56da2807431712718"
+      "sha256": "5307a4c0ba0bf1fa71579c0ab784aca8d32529d2ba9f4092cb267aadafdedb96"
     },
     {
       "name": "srezai-eval",
@@ -109,15 +109,15 @@
       "kind": "guide",
       "user_invocable": true,
       "tools": [],
-      "sha256": "6fd8edc04b7c13245a775993409fd111b07f9b9a0a163e91e985de939a8fb6c9"
+      "sha256": "07efc4a1cb7e64bc72086064395971022d14e25f9ea2abca5123e575f2dd1a21"
     },
     {
-      "name": "srezai-sourcing",
-      "path": "./skills/srezai-sourcing",
+      "name": "srezai-china-sourcing",
+      "path": "./skills/srezai-china-sourcing",
       "kind": "guide",
       "user_invocable": false,
       "tools": [],
-      "sha256": "2a0b1897bfac6e95551c842d9f656ba3bd3dc9dc658b3b40cf2c82abe6d650a6"
+      "sha256": "6c113c7141af7c8117c73f5910ca89756bb3dfaa321fbcb10d757f6248220df5"
     }
   ]
 }

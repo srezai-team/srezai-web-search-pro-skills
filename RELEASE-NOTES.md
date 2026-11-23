@@ -53,7 +53,7 @@
 Установка:
 
 ```bash
-npx skills add srezai-team/srezai-web-search-pro-skill
+npx skills add srezai-team/srezai-web-search-pro-skills
 ```
 
 Компаньон — консольная обёртка `srezai-cli` (12 команд, без зависимостей):

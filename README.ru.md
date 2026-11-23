@@ -17,13 +17,13 @@ srezai это ≈10,8 тыс. токенов (13 инструментов + ин
 ### Скиллы (любой агент, который читает `SKILL.md`)
 
 ```bash
-npx skills add srezai-team/srezai-web-search-pro-skill
+npx skills add srezai-team/srezai-web-search-pro-skills
 ```
 
 Плагин Claude Code:
 
 ```bash
-/plugin marketplace add srezai-team/srezai-web-search-pro-skill
+/plugin marketplace add srezai-team/srezai-web-search-pro-skills
 /plugin install srezai-skills@srezai-skills
 ```
 
@@ -77,7 +77,7 @@ export SREZAI_API_KEY=srz_live_…      # или ~/.config/srezai/config.json (c
 | `srezai-site` | «какие страницы на сайте», «обойди раздел» | `map`, `crawl` |
 | `srezai-research` | «проверь факт», «собери ответ», «исследуй тему» | `verify_claim`, `answer_search`, `deep_research` |
 | `srezai-transcript` | «субтитры», «о чём видео» | `yt_srt` |
-| `srezai-sourcing` | «найди поставщика/фабрику в Китае», MOQ, FOB, 1688 | — |
+| `srezai-china-sourcing` | «найди поставщика/фабрику в Китае», MOQ, FOB, 1688 | — |
 
 ## Инструменты
 

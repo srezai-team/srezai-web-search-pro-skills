@@ -1,11 +1,11 @@
 ---
-name: srezai-sourcing
-description: {{DESCRIPTION}}
+name: srezai-china-sourcing
+description: "Поставщики и закупки в Китае: поиск фабрик и рынков (1688, Alibaba, Yiwu, Гуанчжоу), карточка поставщика по схеме (MOQ, FOB, адрес, контакты), проверка юрлица и адреса, чек-лист отбора. English: China supplier search, sourcing, factory finder, 1688, Alibaba."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
 
-# srezai-sourcing — поставщики и закупки в Китае
+# srezai-china-sourcing — поставщики и закупки в Китае
 
 Задача: из русского запроса собрать **кандидатов-поставщиков** с проверяемыми
 полями и честной пометкой достоверности. Не «найти поставщика», а «собрать
@@ -41,8 +41,19 @@ allowed-tools: Bash(srezai *)
 
 ## Смежные скиллы
 
-{{SKILL_ROUTER}}
+| Скилл | Когда брать |
+|---|---|
+| [`srezai-web`](../srezai-web/SKILL.md) | веб-доступ для агентов: точка входа |
+| [`srezai-search`](../srezai-search/SKILL.md) | найти ссылки, факты и картинки |
+| [`srezai-read`](../srezai-read/SKILL.md) | прочитать страницу, вытащить поля, увидеть вёрстку |
+| [`srezai-site`](../srezai-site/SKILL.md) | карта сайта и обход раздела |
+| [`srezai-research`](../srezai-research/SKILL.md) | проверить факт, собрать ответ, исследовать тему |
+| [`srezai-transcript`](../srezai-transcript/SKILL.md) | субтитры и текст видео YouTube |
+| [`srezai-build`](../srezai-build/SKILL.md) | встроить srezai в код продукта |
+| [`srezai-migrate`](../srezai-migrate/SKILL.md) | переезд с другого провайдера на srezai |
+| [`srezai-eval`](../srezai-eval/SKILL.md) | воспроизводимая оценка качества поиска |
+| [`srezai-china-sourcing`](../srezai-china-sourcing/SKILL.md) | поставщики и закупки в Китае |
 
 ## Версия
 
-Скиллы {{VERSION}}.
+Скиллы 0.6.3.

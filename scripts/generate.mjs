@@ -291,7 +291,7 @@ const llms = table([
   `## Skills (${cfg.skills.length} narrow skills, Apache-2.0)`,
   "",
   "```bash",
-  "npx skills add srezai-team/srezai-web-search-pro-skill",
+  "npx skills add srezai-team/srezai-web-search-pro-skills",
   "```",
   "",
   ...cfg.skills.map((s) => `- ${s.name}: ${s.title.split("— ").slice(1).join("— ") || s.title}`),
@@ -312,7 +312,7 @@ const pluginJson = JSON.stringify(
       "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты сайтов, извлечение по схеме, проверка фактов, готовые ответы и глубокие исследования.",
     author: { name: "srezai", url: "https://srezai.ru" },
     homepage: "https://srezai.ru/docs/skills",
-    repository: "https://github.com/srezai-team/srezai-web-search-pro-skill",
+    repository: "https://github.com/srezai-team/srezai-web-search-pro-skills",
     license: "Apache-2.0",
     icon: "./assets/icon.png",
     keywords: ["web-search", "ai-agents", "mcp", "cli", "runet", "fact-checking"],
@@ -342,7 +342,7 @@ const marketplaceJson = JSON.stringify(
 
 // Один контент — несколько харнессов: каждый манифест указывает на те же skills/.
 // Схемы повторяют то, что реально используют официальные паки конкурентов.
-const repositoryUrl = "https://github.com/srezai-team/srezai-web-search-pro-skill";
+const repositoryUrl = "https://github.com/srezai-team/srezai-web-search-pro-skills";
 const harnessDescription =
   "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты и обход сайтов, извлечение по схеме, проверка фактов с цитатами, ответы, глубокие исследования, субтитры YouTube, интеграция в код, миграция и оценка качества.";
 

@@ -17,7 +17,7 @@ JSON-схеме, проверка утверждений с дословными
 ## Skills (10 narrow skills, Apache-2.0)
 
 ```bash
-npx skills add srezai-team/srezai-web-search-pro-skill
+npx skills add srezai-team/srezai-web-search-pro-skills
 ```
 
 - srezai-web: веб-доступ для агентов: точка входа
@@ -29,7 +29,7 @@ npx skills add srezai-team/srezai-web-search-pro-skill
 - srezai-build: встроить srezai в код продукта
 - srezai-migrate: переезд с другого провайдера на srezai
 - srezai-eval: воспроизводимая оценка качества поиска
-- srezai-sourcing: поставщики и закупки в Китае
+- srezai-china-sourcing: поставщики и закупки в Китае
 
 ## Tools
 
@@ -47,4 +47,4 @@ npx skills add srezai-team/srezai-web-search-pro-skill
 - yt_srt: YouTube video text: transcripts, summaries, quotes. Price: 1 credit per video; 15 with speaker labeling.
 - get_usage: Check balance, remaining quota, spend and the price list. Price: free; does not use the quota.
 
-Generated from src/tools.json v0.6.2.
+Generated from src/tools.json v0.6.3.
