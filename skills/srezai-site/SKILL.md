@@ -1,6 +1,6 @@
 ---
 name: srezai-site
-description: "Карта и обход сайта через srezai: разделы и адреса, объём, чтение раздела целиком. Триггеры: «какие страницы на сайте», «собери раздел», «обойди документацию», «все события с агрегатора». English: site map, crawl."
+description: "Карта и обход сайта: разделы и адреса, объём, чтение раздела целиком, обход документации. Триггеры: «какие страницы на сайте», «обойди сайт», «собери раздел», «все события с агрегатора». English: site map, crawl website, sitemap, scrape section."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -95,4 +95,4 @@ srezai crawl https://docs.example.com --select-paths /api/ --limit 10
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

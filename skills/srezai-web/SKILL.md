@@ -1,6 +1,6 @@
 ---
 name: srezai-web
-description: "Веб-доступ srezai: какой канал выбрать (CLI `srezai`, MCP, REST), как получить ключ и оплатить, где пробный режим, как экономить кредиты, сколько потратит задача и что делать с 401/402/429. Начинай здесь, если задача про веб, а инструмент неясен. English: srezai setup, keys, billing, budget, credits."
+description: "Веб-доступ srezai: какой канал выбрать (CLI, MCP, REST), ключ и оплата, пробный режим, экономия кредитов, бюджет задачи, что делать с 401/402/429. Триггеры: «настрой srezai», «почему 401», «сколько потрачу». English: srezai setup, keys, billing, budget, credits."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -85,4 +85,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.0. CLI `srezai` 0.1.0+; если старее — `npx srezai-cli@latest`.
+Скиллы 0.6.1. CLI `srezai` 0.1.0+; если старее — `npx srezai-cli@latest`.

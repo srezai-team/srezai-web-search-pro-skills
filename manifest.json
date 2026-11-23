@@ -1,6 +1,6 @@
 {
   "name": "srezai-skills",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": "https://github.com/srezai-team/srezai-web-search-pro-skill",
   "license": "Apache-2.0",
   "generated_from": [
@@ -28,7 +28,7 @@
       "tools": [
         "get_usage"
       ],
-      "sha256": "a6951ce227ae948adb9c336eefeb7745ca40ab40029d4e1ae2f5f811c74659bf"
+      "sha256": "51e2d09fbeb9d64f6f604441d048c9b6753dea7a9b5e06b3237a48712ccd9047"
     },
     {
       "name": "srezai-search",
@@ -39,7 +39,7 @@
         "web_search",
         "image_search"
       ],
-      "sha256": "d2137372fc483c066e21d79ec63e316b85a5b28194b182e8fc8d2ee1ca8d4c52"
+      "sha256": "a6e68d49295748b6131051f93c12bb206f18b5a297490d03173b56141be2a2c5"
     },
     {
       "name": "srezai-read",
@@ -52,7 +52,7 @@
         "extract",
         "fetch_page"
       ],
-      "sha256": "6f0b3447fd0305ff5427766e5470f47056f542073b63b86be04e90ceb9d8420f"
+      "sha256": "659cee09ede356d45d465937d4a3f47d600ce1b3febac92eea2fe7d35cb81aed"
     },
     {
       "name": "srezai-site",
@@ -63,7 +63,7 @@
         "map",
         "crawl"
       ],
-      "sha256": "18063ed0d1aa42253ebd1b44377a3557ddd4a9e76a18b39d46b4db6bdc349b14"
+      "sha256": "3f98c3458e0e47f42607084e3fb6bfc7395af87ed9435869f9c964fcabfce737"
     },
     {
       "name": "srezai-research",
@@ -75,7 +75,7 @@
         "answer_search",
         "deep_research"
       ],
-      "sha256": "a66d8c9f49a98fdb6dc230ee3c2975ee1be348a9e5359051a80df78f744dfd82"
+      "sha256": "427b56b56b57650f115fc3dbc58d26e274fa84b9be5c9c2ca34549c8b38ccb06"
     },
     {
       "name": "srezai-transcript",
@@ -85,7 +85,7 @@
       "tools": [
         "yt_srt"
       ],
-      "sha256": "1218cb010a5df9761f204a298bc22f54e02b87ca41addbef1955d736f64a032d"
+      "sha256": "0cacb01d069d54ff843b14f9317b39015b274e6bc9e5545266acc6321d66d3fe"
     },
     {
       "name": "srezai-build",
@@ -93,7 +93,7 @@
       "kind": "guide",
       "user_invocable": false,
       "tools": [],
-      "sha256": "fd3bf169718665927688bd79075b306e823031758800c6e40eb02f4f50c66cce"
+      "sha256": "4f7eb7b57e2aaec90d13b7dda9a18ded5f47897de1296200c9f086991d221a5b"
     },
     {
       "name": "srezai-migrate",
@@ -101,7 +101,7 @@
       "kind": "guide",
       "user_invocable": false,
       "tools": [],
-      "sha256": "eb5263c800c1de7b27912a00371772fb5e813165c268e9c145d6b139b1dbde02"
+      "sha256": "1be08cb6721212202497e542d161609488f35e6ecf9e2ce8996273f6f0540d74"
     },
     {
       "name": "srezai-eval",
@@ -109,7 +109,7 @@
       "kind": "guide",
       "user_invocable": true,
       "tools": [],
-      "sha256": "9a3939681efeabd0d630ea5664ce22a0963ad8bf73ac25c7b8a058c2e239cd6c"
+      "sha256": "1b6a421c005991e1b85a9a74a8fccfcaa394ff467b1b1555d0d09550fe2653ab"
     }
   ]
 }

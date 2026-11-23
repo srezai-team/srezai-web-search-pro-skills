@@ -5,6 +5,15 @@
 Runet-first coverage, PDF, screenshots, site crawls, schema extraction, claim
 verification with quotes, synthesized answers and deep research.
 
+## For Russian-speaking readers (RU)
+
+Веб-доступ для ИИ-агентов: поиск по вебу и новостям, чтение страниц и файлов
+(PDF, Word, Excel, PowerPoint), карта сайта и обход раздела, извлечение полей по
+JSON-схеме, проверка утверждений с дословными цитатами, готовые ответы, глубокое
+исследование и субтитры YouTube. Сильное покрытие рунета. Приватность: запросы
+идут только на srezai.ru, ключ не печатается; в телеметрию уходит лишь имя
+клиента и скилла (см. X-Client), без текста запросов.
+
 ## Skills (9 narrow skills, Apache-2.0)
 
 ```bash
@@ -37,4 +46,4 @@ npx skills add srezai-team/srezai-web-search-pro-skill
 - yt_srt: YouTube video text: transcripts, summaries, quotes. Price: 1 credit per video; 15 with speaker labeling.
 - get_usage: Check balance, remaining quota, spend and the price list. Price: free; does not use the quota.
 
-Generated from src/tools.json v0.6.0.
+Generated from src/tools.json v0.6.1.

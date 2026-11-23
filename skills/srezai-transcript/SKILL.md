@@ -1,6 +1,6 @@
 ---
 name: srezai-transcript
-description: "Субтитры и текст видео YouTube через srezai: конспект, цитата с таймкодом, длинные записи до 200 тыс. символов. Триггеры: «субтитры», «о чём видео», «цитата из видео», «что сказали в ролике». English: YouTube transcript, video quote, timestamp."
+description: "Субтитры и текст видео YouTube: конспект, цитата с таймкодом, длинные записи до 200 тыс. символов. Триггеры: «субтитры», «о чём видео», «цитата из видео», «что сказали в ролике». English: YouTube transcript, video quote, timestamp."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -68,4 +68,4 @@ srezai transcript https://youtu.be/ID --languages ru --timestamps
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

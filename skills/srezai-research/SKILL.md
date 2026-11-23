@@ -1,6 +1,6 @@
 ---
 name: srezai-research
-description: "Проверка и синтез через srezai: вердикт по факту с цитатами (verify до текста), готовый ответ по источникам, многошаговое исследование с талоном. Триггеры: «проверь факт», «проверь до текста», «собери ответ», «исследуй тему». English: fact check, verify first, answer, deep research."
+description: "Проверка и синтез: вердикт по факту с цитатами (verify до текста), готовый ответ по источникам, глубокое исследование. Триггеры: «проверь факт», «проверь до текста», «собери ответ», «исследуй тему». English: fact check, verify claim, deep research, cited answer."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -109,4 +109,4 @@ srezai deep status <ticket>       # опрос, дозабор бесплатн�
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

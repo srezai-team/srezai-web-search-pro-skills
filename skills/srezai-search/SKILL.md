@@ -1,6 +1,6 @@
 ---
 name: srezai-search
-description: "Поиск в вебе через srezai: ссылки, факты, сниппеты, свежие новости, картинки. Триггеры: «найди», «поищи», «какие источники», «картинки». Полный текст страницы — скилл srezai-read. English: web search, images, links."
+description: "Поиск в вебе через srezai: ссылки, факты, сниппеты, свежие новости, картинки. Триггеры: «найди», «поищи в интернете», «какие источники», «новости за неделю». Полный текст страницы — srezai-read. English: web search, news search, images, links, scrape SERP."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -82,4 +82,4 @@ srezai media "запрос" --num 3
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

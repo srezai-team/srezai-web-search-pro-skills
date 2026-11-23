@@ -1,6 +1,6 @@
 ---
 name: srezai-migrate
-description: "Переезд на srezai с Tavily, Firecrawl, Exa или SerpAPI: таблица соответствия инструментов, чего у нас нет (мониторы, snapshot, соцсети), чек-лист миграции кода и поиск остатков старого провайдера. English: migrate from Tavily, Firecrawl, Exa, SerpAPI."
+description: "Переезд на srezai с Tavily, Firecrawl, Exa или SerpAPI: таблица соответствия инструментов, чего у нас нет, grep остатков, чек-лист миграции. Триггеры: «переезд с Tavily», «заменить Firecrawl», «switch provider». English: migrate from Tavily, Firecrawl, Exa, SerpAPI, switch provider."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -74,4 +74,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

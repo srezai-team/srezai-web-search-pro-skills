@@ -1,6 +1,6 @@
 ---
 name: srezai-eval
-description: "Воспроизводимая оценка качества веб-поиска: датасет, манифест прогона, не меньше трёх запусков, судья с обоснованием, p50/p95 и отчёт «качество × цена × латентность». Вызывается человеком явно. English: search evaluation, benchmark, bake-off."
+description: "Воспроизводимая оценка качества поиска: датасет, манифест, ≥3 прогона, судья, p50/p95, учёт фейлов, отчёт «качество × цена × латентность». Вызывается человеком. Триггеры: «бенчмарк», «bake-off», «сравни провайдеров». English: search evaluation, benchmark, bake-off."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 disable-model-invocation: true
@@ -75,4 +75,4 @@ disable-model-invocation: true
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

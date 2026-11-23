@@ -1,6 +1,6 @@
 ---
 name: srezai-read
-description: "Чтение страниц через srezai: Markdown, PDF и Office, большая страница окнами по offset, пачки ссылок, извлечение 2–5 полей по JSON-схеме, скриншот вёрстки. Триггеры: «прочитай», «что на странице», «страница не влезла», «вытащи поля». English: read page, long page, extract, screenshot."
+description: "Чтение страниц через srezai: Markdown, PDF и Office, большая страница окнами по offset, пачки ссылок, 2–5 полей по JSON-схеме, скриншот вёрстки. Триггеры: «прочитай», «что на странице», «страница не влезла», «вытащи поля». English: read page, scrape page, PDF, extract fields, screenshot."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -108,4 +108,4 @@ srezai fetch https://example.com --max-chars 2000
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.

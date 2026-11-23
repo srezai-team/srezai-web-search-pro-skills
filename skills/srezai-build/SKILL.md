@@ -1,6 +1,6 @@
 ---
 name: srezai-build
-description: "Интеграция srezai в код: выбор канала (CLI, MCP, REST), ключ и Bearer, обработка 401/402/429 и таймаутов, идемпотентность, примеры Node/Python/curl, чек-лист перед релизом. English: srezai API integration, SDK, REST, MCP server."
+description: "Интеграция srezai в код: каналы CLI/MCP/REST, ключ и Bearer, ошибки 401/402/429, таймауты, идемпотентность, примеры Node/Python/curl, чек-лист релиза. Триггеры: «встроить srezai», «SDK», «своя интеграция». English: srezai API integration, SDK, REST, MCP server, Claude Code, Codex."
 license: Apache-2.0
 allowed-tools: Bash(srezai *)
 ---
@@ -84,4 +84,4 @@ IP (`X-Srezai-Mode: trial`); для прода это не замена ключ
 
 ## Версия
 
-Скиллы 0.6.0.
+Скиллы 0.6.1.
