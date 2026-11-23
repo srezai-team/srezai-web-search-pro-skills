@@ -1,0 +1,38 @@
+{
+  "name": "srezai-skills",
+  "displayName": "srezai",
+  "version": "0.6.1",
+  "description": "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты и обход сайтов, извлечение по схеме, проверка фактов с цитатами, ответы, глубокие исследования, субтитры YouTube, интеграция в код, миграция и оценка качества.",
+  "author": {
+    "name": "srezai",
+    "url": "https://srezai.ru"
+  },
+  "homepage": "https://srezai.ru/docs/skills",
+  "repository": "https://github.com/srezai-team/srezai-web-search-pro-skill",
+  "license": "Apache-2.0",
+  "keywords": [
+    "web-search",
+    "ai-agents",
+    "mcp",
+    "research",
+    "fact-checking",
+    "crawl"
+  ],
+  "skills": [
+    "./skills/srezai-web",
+    "./skills/srezai-search",
+    "./skills/srezai-read",
+    "./skills/srezai-site",
+    "./skills/srezai-research",
+    "./skills/srezai-transcript",
+    "./skills/srezai-build",
+    "./skills/srezai-migrate",
+    "./skills/srezai-eval"
+  ],
+  "rules": "./rules/",
+  "mcpServers": {
+    "srezai": {
+      "url": "https://srezai.ru/api/mcp"
+    }
+  }
+}

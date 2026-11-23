@@ -1,0 +1,21 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Core",
+      "description": "Веб-поиск, чтение страниц и точка входа",
+      "skills": ["srezai-web", "srezai-search", "srezai-read"]
+    },
+    {
+      "title": "Tasks",
+      "description": "Проверка фактов, обход сайта, субтитры YouTube",
+      "skills": ["srezai-research", "srezai-site", "srezai-transcript"]
+    },
+    {
+      "title": "Guides",
+      "description": "Интеграция в код, переезд с другого провайдера, оценка качества",
+      "skills": ["srezai-build", "srezai-migrate", "srezai-eval"]
+    }
+  ]
+}

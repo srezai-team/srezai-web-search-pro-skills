@@ -24,7 +24,8 @@ const die = (message) => {
 
 // --- проверки источников ----------------------------------------------------
 const REQUIRED_TOOL = ["name", "purpose", "purpose_en", "price", "price_en", "key_params", "when_not", "cli", "output", "skill"];
-const REQUIRED_SKILL = ["name", "title", "description", "tools"];
+const REQUIRED_SKILL = ["name", "title", "description", "kind"];
+const SKILL_KINDS = new Set(["toolset", "guide"]);
 const problems = [];
 const seen = new Set();
 const toolByName = new Map();
@@ -48,7 +49,20 @@ for (const skill of cfg.skills) {
   for (const field of REQUIRED_SKILL) {
     if (!skill[field] || String(skill[field]).trim() === "") problems.push(`${skill.name}: пустое поле ${field}`);
   }
-  for (const toolName of skill.tools) {
+  if (!SKILL_KINDS.has(skill.kind)) {
+    problems.push(`${skill.name}: kind="${skill.kind}", допустимо: ${[...SKILL_KINDS].join(", ")}`);
+  }
+  const tools = Array.isArray(skill.tools) ? skill.tools : [];
+  if (skill.kind === "toolset" && tools.length === 0) {
+    problems.push(`${skill.name}: kind="toolset" требует непустой tools[]`);
+  }
+  if (skill.kind === "guide" && tools.length > 0) {
+    problems.push(`${skill.name}: kind="guide" не может владеть инструментами (${tools.join(", ")})`);
+  }
+  if (skill.user_invocable !== undefined && typeof skill.user_invocable !== "boolean") {
+    problems.push(`${skill.name}: user_invocable должен быть boolean`);
+  }
+  for (const toolName of tools) {
     if (!toolByName.has(toolName)) problems.push(`${skill.name}: неизвестный инструмент ${toolName}`);
     if (toolSkill.has(toolName)) problems.push(`${toolName}: уже отнесён к ${toolSkill.get(toolName)}`);
     toolSkill.set(toolName, skill.name);
@@ -105,15 +119,33 @@ const skillRouter = () =>
     ...cfg.skills.map((s) => `| [\`${s.name}\`](../${s.name}/SKILL.md) | ${s.title.split("— ").slice(1).join("— ") || s.description.slice(0, 80)} |`),
   ]);
 
+const GUIDE_FORBIDDEN = ["TOOLS_SUMMARY", "TOOL_DETAILS", "CLI_EXAMPLE"];
+
+// user-invocable: скилл без описания для модели, вызывается только человеком.
+// Флаг Claude-совместимый; остальные харнессы просто игнорируют ключ.
+const applyInvocation = (skillMd, skill) => {
+  if (!skill.user_invocable) return skillMd;
+  const match = skillMd.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!match) die(`${skill.name}: user_invocable требует YAML-frontmatter в шаблоне`);
+  if (/^disable-model-invocation:/m.test(match[1])) return skillMd;
+  return skillMd.replace(match[0], `---\n${match[1]}\ndisable-model-invocation: true\n---\n`);
+};
+
 const expand = (template, skill) => {
+  if (skill.kind === "guide") {
+    const forbidden = GUIDE_FORBIDDEN.filter((key) => template.includes(`{{${key}}}`));
+    if (forbidden.length > 0) {
+      die(`${skill.name}: скилл-руководство не может использовать ${forbidden.map((k) => `{{${k}}}`).join(", ")}`);
+    }
+  }
   const values = {
     // YAML: двоеточие внутри описания ломает plain-scalar, поэтому всегда в кавычках.
     DESCRIPTION: JSON.stringify(skill.description),
     VERSION: src.version,
     SKILL_ROUTER: skillRouter(),
-    TOOLS_SUMMARY: toolsSummary(skill),
+    TOOLS_SUMMARY: skill.tools.length > 0 ? toolsSummary(skill) : "",
     TOOL_DETAILS: skill.tools.map((name) => toolDetails(toolByName.get(name))).join("\n\n"),
-    CLI_EXAMPLE: toolByName.get(skill.tools[0]).cli,
+    CLI_EXAMPLE: skill.tools.length > 0 ? toolByName.get(skill.tools[0]).cli : "",
   };
   let out = template;
   for (const [key, value] of Object.entries(values)) {
@@ -121,7 +153,7 @@ const expand = (template, skill) => {
   }
   const left = out.match(/\{\{[A-Z_]+\}\}/g);
   if (left) die(`${skill.name}: в шаблоне остались плейсхолдеры ${left.join(", ")}`);
-  return out;
+  return applyInvocation(out, skill);
 };
 
 const referenceDoc = (tool) =>
@@ -189,10 +221,17 @@ for (const skill of cfg.skills) {
   const extraDir = join(root, "src/skills", skill.name, "references");
   if (existsSync(extraDir)) {
     for (const file of readdirSync(extraDir)) {
-      artifacts.push({
-        path: join(skillDir, "references", file),
-        content: readFileSync(join(extraDir, file), "utf8"),
-      });
+      if (!file.endsWith(".md")) die(`${skill.name}/references/${file}: справочники должны быть .md`);
+      const content = readFileSync(join(extraDir, file), "utf8");
+      // Ручные справочники тоже гейтятся: иначе «глубина в references» превращается
+      // в свалку, которую агент читает целиком.
+      if (content.length > budget.extra_reference_chars) {
+        die(
+          `${skill.name}/references/${file}: ${content.length} символов > ` +
+            `budget.extra_reference_chars (${budget.extra_reference_chars})`,
+        );
+      }
+      artifacts.push({ path: join(skillDir, "references", file), content });
     }
   }
 }
@@ -240,7 +279,16 @@ const llms = table([
   "Runet-first coverage, PDF, screenshots, site crawls, schema extraction, claim",
   "verification with quotes, synthesized answers and deep research.",
   "",
-  "## Skills (6 narrow skills, Apache-2.0)",
+  "## For Russian-speaking readers (RU)",
+  "",
+  "Веб-доступ для ИИ-агентов: поиск по вебу и новостям, чтение страниц и файлов",
+  "(PDF, Word, Excel, PowerPoint), карта сайта и обход раздела, извлечение полей по",
+  "JSON-схеме, проверка утверждений с дословными цитатами, готовые ответы, глубокое",
+  "исследование и субтитры YouTube. Сильное покрытие рунета. Приватность: запросы",
+  "идут только на srezai.ru, ключ не печатается; в телеметрию уходит лишь имя",
+  "клиента и скилла (см. X-Client), без текста запросов.",
+  "",
+  `## Skills (${cfg.skills.length} narrow skills, Apache-2.0)`,
   "",
   "```bash",
   "npx skills add srezai-team/srezai-web-search-pro-skill",
@@ -284,10 +332,109 @@ const marketplaceJson = JSON.stringify(
       {
         name: "srezai-skills",
         source: "./",
-        description:
-          "6 узких скиллов srezai: веб-поиск, чтение страниц, карты сайтов, проверка фактов, ответы, субтитры YouTube. Работают через CLI srezai, MCP или REST.",
+        description: `${cfg.skills.length} скиллов srezai: веб-поиск, чтение страниц, карты сайтов, проверка фактов, ответы, субтитры YouTube, интеграция, миграция и оценка качества. Работают через CLI srezai, MCP или REST.`,
       },
     ],
+  },
+  null,
+  2,
+) + "\n";
+
+// Один контент — несколько харнессов: каждый манифест указывает на те же skills/.
+// Схемы повторяют то, что реально используют официальные паки конкурентов.
+const repositoryUrl = "https://github.com/srezai-team/srezai-web-search-pro-skill";
+const harnessDescription =
+  "Веб-доступ для агентов через srezai: поиск, чтение страниц, карты и обход сайтов, извлечение по схеме, проверка фактов с цитатами, ответы, глубокие исследования, субтитры YouTube, интеграция в код, миграция и оценка качества.";
+
+const codexPluginJson = JSON.stringify(
+  {
+    name: "srezai-skills",
+    version: src.version,
+    description: harnessDescription,
+    author: { name: "srezai", url: "https://srezai.ru" },
+    homepage: "https://srezai.ru/docs/skills",
+    repository: repositoryUrl,
+    license: "Apache-2.0",
+    keywords: ["web-search", "ai-agents", "mcp", "cli", "research", "fact-checking", "crawl"],
+    skills: pluginSkills,
+    mcpServers: "./.mcp.json",
+  },
+  null,
+  2,
+) + "\n";
+
+const cursorPluginJson = JSON.stringify(
+  {
+    name: "srezai-skills",
+    displayName: "srezai",
+    version: src.version,
+    description: harnessDescription,
+    author: { name: "srezai", url: "https://srezai.ru" },
+    homepage: "https://srezai.ru/docs/skills",
+    repository: repositoryUrl,
+    license: "Apache-2.0",
+    keywords: ["web-search", "ai-agents", "mcp", "research", "fact-checking", "crawl"],
+    skills: pluginSkills,
+    rules: "./rules/",
+    mcpServers: {
+      srezai: { url: src.server.mcp_url },
+    },
+  },
+  null,
+  2,
+) + "\n";
+
+const geminiExtensionJson = JSON.stringify(
+  {
+    name: "srezai-skills",
+    version: src.version,
+    description:
+      "Web search, page reading, site maps and crawls, schema extraction, claim verification with quotes, answers, deep research and YouTube transcripts for Gemini CLI via the srezai hosted MCP server and skills.",
+    mcpServers: {
+      srezai: {
+        httpUrl: src.server.mcp_url,
+        headers: { "X-Client-Name": "gemini cli" },
+      },
+    },
+  },
+  null,
+  2,
+) + "\n";
+
+// manifest.json: машинный индекс пакета — версия, состав, хеши скиллов.
+// Нужен, чтобы потребитель мог сверить установленное с опубликованным.
+const skillManifest = cfg.skills
+  .slice()
+  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  .map((skill) => {
+    const artifact = artifacts.find((a) => a.path === join(root, "skills", skill.name, "SKILL.md"));
+    if (!artifact) die(`${skill.name}: не найден сгенерированный SKILL.md для manifest.json`);
+    return {
+      name: skill.name,
+      path: `./skills/${skill.name}`,
+      kind: skill.kind,
+      user_invocable: Boolean(skill.user_invocable),
+      tools: skill.tools,
+      sha256: createHash("sha256").update(artifact.content).digest("hex"),
+    };
+  });
+
+const manifestJson = JSON.stringify(
+  {
+    name: "srezai-skills",
+    version: src.version,
+    repository: repositoryUrl,
+    license: "Apache-2.0",
+    generated_from: ["src/tools.json", "src/skills.json", "src/skills/*/SKILL.md.tpl"],
+    designed_for: {
+      claude_code: ".claude-plugin/plugin.json",
+      codex: ".codex-plugin/plugin.json",
+      cursor: ".cursor-plugin/plugin.json",
+      gemini_cli: "gemini-extension.json",
+      any_agent: "skills/*/SKILL.md",
+    },
+    counts: { skills: cfg.skills.length, tools: src.tools.length },
+    skills: skillManifest,
   },
   null,
   2,
@@ -299,6 +446,10 @@ artifacts.push(
   { path: join(root, "VERSION"), content: `${src.version}\n` },
   { path: join(root, ".claude-plugin/plugin.json"), content: pluginJson },
   { path: join(root, ".claude-plugin/marketplace.json"), content: marketplaceJson },
+  { path: join(root, ".codex-plugin/plugin.json"), content: codexPluginJson },
+  { path: join(root, ".cursor-plugin/plugin.json"), content: cursorPluginJson },
+  { path: join(root, "gemini-extension.json"), content: geminiExtensionJson },
+  { path: join(root, "manifest.json"), content: manifestJson },
 );
 
 // README: только блок инструментов (остальное правится руками).
@@ -332,7 +483,8 @@ if (!checkOnly && existsSync(join(root, "SKILL.md"))) {
 }
 
 // --- контрольные суммы ------------------------------------------------------
-const SKIP_DIRS = new Set([".git", "node_modules"]);
+// runs/ — артефакты eval-прогонов: временные, в контрольные суммы не входят.
+const SKIP_DIRS = new Set([".git", "node_modules", "runs"]);
 const CHECKSUMS = "SHA256SUMS.txt";
 const walk = (dir, found = []) => {
   for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {

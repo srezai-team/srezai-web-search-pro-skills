@@ -1,15 +1,17 @@
 {
   "schema": 1,
   "budget": {
-    "descriptions_chars": 1860,
-    "skill_md_chars": 3830,
-    "reference_chars": 4800
+    "descriptions_chars": 3000,
+    "skill_md_chars": 4600,
+    "reference_chars": 4800,
+    "extra_reference_chars": 8200
   },
   "skills": [
     {
       "name": "srezai-web",
+      "kind": "toolset",
       "title": "srezai-web — веб-доступ для агентов: точка входа",
-      "description": "Веб-доступ srezai: какой канал выбрать (CLI `srezai`, MCP, REST), как получить ключ и оплатить, где пробный режим, как экономить кредиты, что делать с 401/402/429. Начинай здесь, если задача про веб, а инструмент неясен. English: srezai setup, keys, billing.",
+      "description": "Веб-доступ srezai: какой канал выбрать (CLI, MCP, REST), ключ и оплата, пробный режим, экономия кредитов, бюджет задачи, что делать с 401/402/429. Триггеры: «настрой srezai», «почему 401», «сколько потрачу». English: srezai setup, keys, billing, budget, credits.",
       "tools": [
         "get_usage"
       ],
@@ -17,8 +19,9 @@
     },
     {
       "name": "srezai-search",
+      "kind": "toolset",
       "title": "srezai-search — найти ссылки, факты и картинки",
-      "description": "Поиск в вебе через srezai: ссылки, факты, сниппеты, свежие новости, картинки. Триггеры: «найди», «поищи», «какие источники», «картинки». Полный текст страницы — скилл srezai-read. English: web search, images, links.",
+      "description": "Поиск в вебе через srezai: ссылки, факты, сниппеты, свежие новости, картинки. Триггеры: «найди», «поищи в интернете», «какие источники», «новости за неделю». Полный текст страницы — srezai-read. English: web search, news search, images, links, scrape SERP.",
       "tools": [
         "web_search",
         "image_search"
@@ -27,8 +30,9 @@
     },
     {
       "name": "srezai-read",
+      "kind": "toolset",
       "title": "srezai-read — прочитать страницу, вытащить поля, увидеть вёрстку",
-      "description": "Чтение страниц через srezai: Markdown, PDF и Office, продолжение длинной страницы по offset, пачки ссылок, извлечение 2–5 полей по JSON-схеме, скриншот вёрстки. Триггеры: «прочитай», «что на странице», «вытащи поля». English: read page, extract, screenshot.",
+      "description": "Чтение страниц через srezai: Markdown, PDF и Office, большая страница окнами по offset, пачки ссылок, 2–5 полей по JSON-схеме, скриншот вёрстки. Триггеры: «прочитай», «что на странице», «страница не влезла», «вытащи поля». English: read page, scrape page, PDF, extract fields, screenshot.",
       "tools": [
         "read_url",
         "read_urls",
@@ -39,8 +43,9 @@
     },
     {
       "name": "srezai-site",
+      "kind": "toolset",
       "title": "srezai-site — карта сайта и обход раздела",
-      "description": "Карта и обход сайта через srezai: разделы и адреса, объём, чтение раздела целиком. Триггеры: «какие страницы на сайте», «собери раздел», «обойди документацию», «все события с агрегатора». English: site map, crawl.",
+      "description": "Карта и обход сайта: разделы и адреса, объём, чтение раздела целиком, обход документации. Триггеры: «какие страницы на сайте», «обойди сайт», «собери раздел», «все события с агрегатора». English: site map, crawl website, sitemap, scrape section.",
       "tools": [
         "map",
         "crawl"
@@ -49,8 +54,9 @@
     },
     {
       "name": "srezai-research",
+      "kind": "toolset",
       "title": "srezai-research — проверить факт, собрать ответ, исследовать тему",
-      "description": "Проверка и синтез через srezai: вердикт по факту с цитатами, готовый ответ по источникам, многошаговое исследование с талоном. Триггеры: «проверь факт», «собери ответ», «исследуй тему», «сравни». English: verify claim, answer, deep research.",
+      "description": "Проверка и синтез: вердикт по факту с цитатами (verify до текста), готовый ответ по источникам, глубокое исследование. Триггеры: «проверь факт», «проверь до текста», «собери ответ», «исследуй тему». English: fact check, verify claim, deep research, cited answer.",
       "tools": [
         "verify_claim",
         "answer_search",
@@ -60,12 +66,38 @@
     },
     {
       "name": "srezai-transcript",
+      "kind": "toolset",
       "title": "srezai-transcript — субтитры и текст видео YouTube",
-      "description": "Субтитры и текст видео YouTube через srezai: конспект, цитата с таймкодом, длинные записи до 200 тыс. символов. Триггеры: «субтитры», «о чём видео», «что сказали в ролике». English: YouTube transcript.",
+      "description": "Субтитры и текст видео YouTube: конспект, цитата с таймкодом, длинные записи до 200 тыс. символов. Триггеры: «субтитры», «о чём видео», «цитата из видео», «что сказали в ролике». English: YouTube transcript, video quote, timestamp.",
       "tools": [
         "yt_srt"
       ],
       "order": 5
+    },
+    {
+      "name": "srezai-build",
+      "kind": "guide",
+      "title": "srezai-build — встроить srezai в код продукта",
+      "description": "Интеграция srezai в код: каналы CLI/MCP/REST, ключ и Bearer, ошибки 401/402/429, таймауты, идемпотентность, примеры Node/Python/curl, чек-лист релиза. Триггеры: «встроить srezai», «SDK», «своя интеграция». English: srezai API integration, SDK, REST, MCP server, Claude Code, Codex.",
+      "tools": [],
+      "order": 6
+    },
+    {
+      "name": "srezai-migrate",
+      "kind": "guide",
+      "title": "srezai-migrate — переезд с другого провайдера на srezai",
+      "description": "Переезд на srezai с Tavily, Firecrawl, Exa или SerpAPI: таблица соответствия инструментов, чего у нас нет, grep остатков, чек-лист миграции. Триггеры: «переезд с Tavily», «заменить Firecrawl», «switch provider». English: migrate from Tavily, Firecrawl, Exa, SerpAPI, switch provider.",
+      "tools": [],
+      "order": 7
+    },
+    {
+      "name": "srezai-eval",
+      "kind": "guide",
+      "user_invocable": true,
+      "title": "srezai-eval — воспроизводимая оценка качества поиска",
+      "description": "Воспроизводимая оценка качества поиска: датасет, манифест, ≥3 прогона, судья, p50/p95, учёт фейлов, отчёт «качество × цена × латентность». Вызывается человеком. Триггеры: «бенчмарк», «bake-off», «сравни провайдеров». English: search evaluation, benchmark, bake-off.",
+      "tools": [],
+      "order": 8
     }
   ]
 }

@@ -1,0 +1,189 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-20",
+  "source": "Позиции P01–P25 из прогона kitay-postavki/compare/srezai-vs-tavily.md (13.11.2026). Запросы сохранены дословно, чтобы новые прогоны были сравнимы с опубликованными; изменены только разметка intent и notes.",
+  "language_note": "Язык позиции — язык запроса. Он же срез отчётности (language в конфигурации прогона остаётся total, чтобы провайдеры получали одинаковые запросы).",
+  "intents": {
+    "fact": "нужен один проверяемый факт: дата, цена, адрес, название",
+    "list": "нужен перечень: рынки, кластеры, фабрики, товары",
+    "compare": "нужно сравнить варианты или предложения по цене и условиям",
+    "factory": "нужен конкретный производитель или фабрика с реквизитами и адресом"
+  },
+  "positions": [
+    {
+      "id": "P01",
+      "query": "FIREBAT mini PC AMD Ryzen 7 7730U factory manufacturer Shenzhen",
+      "language": "en",
+      "intent": "factory",
+      "notes": "В топ-5 ждём производителя/дилера FIREBAT или страницу модели с Ryzen 7 7730U и адресом в Шэньчжэне."
+    },
+    {
+      "id": "P02",
+      "query": "Beelink GMKtec Acemagic mini PC ODM factory Shenzhen wholesale suppliers",
+      "language": "en",
+      "intent": "factory",
+      "notes": "Ждём ODM-фабрики (AZW Technology, Longhua, GMKtec wholesale) с адресами, а не обзоры и маркетплейсы."
+    },
+    {
+      "id": "P03",
+      "query": "Shenzhen Huaqiangbei SEG Electronics Market mini PC wholesale",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём гид по рынку SEG/Хуацянбэй и оптовые каталоги мини-ПК, а не статьи про хостинг."
+    },
+    {
+      "id": "P04",
+      "query": "广州天河电脑城 迷你主机 批发 市场",
+      "language": "zh",
+      "intent": "list",
+      "notes": "Китайский запрос: рынок 天河电脑城 в Гуанчжоу и оптовые точки мини-ПК. Проверка zh-индекса."
+    },
+    {
+      "id": "P05",
+      "query": "Shangyu Songxia umbrella industrial town factories China umbrella capital",
+      "language": "en",
+      "intent": "factory",
+      "notes": "Ждём Шанъюй/Сунся как зонтичный кластер и фабрики с контактами."
+    },
+    {
+      "id": "P06",
+      "query": "Jinjiang Dongshi umbrella factory OEM China",
+      "language": "en",
+      "intent": "factory",
+      "notes": "Ждём OEM-фабрики зонтов в Цзиньцзяне/Дунши."
+    },
+    {
+      "id": "P07",
+      "query": "Yiwu International Trade City umbrella wholesale market section",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём секцию зонтов на рынке Иу (район/этаж), контакты и оптовые предложения."
+    },
+    {
+      "id": "P08",
+      "query": "广州 雨伞 批发市场 伞 批发",
+      "language": "zh",
+      "intent": "list",
+      "notes": "Китайский запрос: оптовые зонтичные рынки Гуанчжоу. Проверка zh-индекса и CJK-сниппетов."
+    },
+    {
+      "id": "P09",
+      "query": "Guangzhou wholesale markets clothing electronics toys address metro",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём перечень рынков Гуанчжоу с адресами и станциями метро."
+    },
+    {
+      "id": "P10",
+      "query": "Canton Fair 141st session spring 2027 dates Guangzhou",
+      "language": "en",
+      "intent": "fact",
+      "notes": "Ждём точные даты 141-й сессии Кантонской ярмарки из официального источника (cantonfair.org.cn)."
+    },
+    {
+      "id": "P11",
+      "query": "Guangdong manufacturing clusters Dongguan electronics Foshan furniture Zhongshan lighting Shunde appliances",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём структурированный перечень кластеров Гуандуна с городами и специализацией."
+    },
+    {
+      "id": "P12",
+      "query": "Zhejiang manufacturing clusters Yiwu Yongkang hardware Wenzhou shoes",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём кластеры Чжэцзяна: Иу, Юнкан (металл), Вэньчжоу (обувь)."
+    },
+    {
+      "id": "P13",
+      "query": "Guangzhou to Yiwu high speed train duration price",
+      "language": "en",
+      "intent": "fact",
+      "notes": "Ждём номера поездов, время в пути и цены (в прошлом прогоне srezai дал больше цифр)."
+    },
+    {
+      "id": "P14",
+      "query": "trending products China 2026 unique gadgets best sellers",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём списки товаров с ценами/маржой, а не общетехнические новости и стресс-болы."
+    },
+    {
+      "id": "P15",
+      "query": "что везти из Китая в Россию 2026 тренды товары спрос",
+      "language": "ru",
+      "intent": "list",
+      "notes": "Ждём русскоязычную аналитику (VTB, «1Карго», «Предприниматель»), а не переводные подборки."
+    },
+    {
+      "id": "P16",
+      "query": "1688 2026 爆款 新款 小商品 趋势",
+      "language": "zh",
+      "intent": "list",
+      "notes": "Китайский запрос про хиты 1688: ждём zhihu/sohu/wiki.1688, а не пустые CJK-сниппеты."
+    },
+    {
+      "id": "P17",
+      "query": "Maker Faire Shenzhen 2026 dates",
+      "language": "en",
+      "intent": "fact",
+      "notes": "Ждём официальные даты Maker Faire Shenzhen 2026."
+    },
+    {
+      "id": "P18",
+      "query": "China new tech gadgets 2026 AI devices innovations import",
+      "language": "en",
+      "intent": "list",
+      "notes": "Ждём рейтинги AI-гаджетов с ценами/поставщиками, а не пресс-релизы."
+    },
+    {
+      "id": "P19",
+      "query": "innovative umbrella 2026 reverse umbrella wholesale factory",
+      "language": "en",
+      "intent": "factory",
+      "notes": "Ждём профильные фабрики reverse-зонтов и каталоги Global Sources."
+    },
+    {
+      "id": "P20",
+      "query": "Yiwu International Trade City guide districts how many days",
+      "language": "en",
+      "intent": "fact",
+      "notes": "Ждём гид по районам Иу и практический ответ, сколько дней закладывать."
+    },
+    {
+      "id": "P21",
+      "query": "FIREBAT мини-ПК бренд производитель Shenzhen фабрика Ryzen 7 7730U",
+      "language": "ru",
+      "intent": "factory",
+      "notes": "Русский запрос про бренд/производителя FIREBAT: ждём связку RU-источник + китайский первоисточник."
+    },
+    {
+      "id": "P22",
+      "query": "Гуанчжоу оптовый рынок зонтов 梓元岗 сумки кожа есть ли рынок зонтов",
+      "language": "ru",
+      "intent": "list",
+      "notes": "Смешанный RU+ZH запрос: ждём конкретные адреса (梓元岗大街) или честный ответ, где зонты."
+    },
+    {
+      "id": "P23",
+      "query": "inverted reverse umbrella wholesale price per piece USD MOQ 100 folding automatic umbrella FOB China supplier",
+      "language": "en",
+      "intent": "compare",
+      "notes": "Ждём предложения фабрик с ценой $/шт и MOQ, пригодные для сравнения."
+    },
+    {
+      "id": "P24",
+      "query": "Shenzhen mini computer factory OEM customized barebone mini PC manufacturer Bao'an Longhua Fuyong industrial park export Russia",
+      "language": "en",
+      "intent": "factory",
+      "notes": "Ждём фабрики с адресами в Баоань/Лунхуа/Фуюн (Zhihuo, EGSMTPC, Fornetech)."
+    },
+    {
+      "id": "P25",
+      "query": "华强北 SEG 华强电子世界 迷你主机 服务器 批发",
+      "language": "zh",
+      "intent": "list",
+      "notes": "Китайский запрос про Хуацянбэй/SEG: в прошлом прогоне srezai выдал 163-почту, хостинг и TripAdvisor — проверка дыры."
+    }
+  ]
+}
