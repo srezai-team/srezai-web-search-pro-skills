@@ -75,4 +75,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы {{VERSION}}. CLI `srezai` 0.1.0+; если старее — `npx srezai-cli@latest`.
+Скиллы {{VERSION}}. CLI `srezai` 0.1.1+; если старее — `npx srezai-cli@latest` (0.1.1 представляет серверу X-Client: по нему видно, каким скиллом сделан вызов).
