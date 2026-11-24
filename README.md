@@ -175,6 +175,7 @@ src/skills.json           ten skills: kind, descriptions, tool mapping, budgets
 src/skills/<name>/        SKILL.md template + hand-written references
 scripts/generate.mjs      builds skills/, references, manifests, docs, VERSION, sums
 scripts/eval/             reproducible quality harness (dry-run by default)
+docs/writing-skills.md   how to write skills for this repo (budgets, checks, anti-patterns)
 skills/<name>/SKILL.md    generated — do not edit by hand
 .claude-plugin/           plugin.json + marketplace.json (generated)
 .codex-plugin/            Codex manifest (generated)
