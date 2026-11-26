@@ -2,13 +2,20 @@
 name: srezai-transcript
 description: "Субтитры и текст видео YouTube: конспект, цитата с таймкодом, длинные записи до 200 тыс. символов. Триггеры: «субтитры», «о чём видео», «цитата из видео», «что сказали в ролике». English: YouTube transcript, video quote, timestamp."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-transcript — субтитры и текст видео YouTube
 
 Ролик, конспект, точная цитата с таймкодом. Только YouTube: VK/Rutube и файлы
 видео не поддерживаются.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`yt_srt`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Быстрый старт
 
@@ -68,4 +75,4 @@ srezai transcript https://youtu.be/ID --languages ru --timestamps
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

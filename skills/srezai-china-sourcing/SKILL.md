@@ -2,7 +2,6 @@
 name: srezai-china-sourcing
 description: "Поставщики и закупки в Китае: поиск фабрик и рынков (1688, Alibaba, Yiwu, Гуанчжоу), карточка поставщика по схеме (MOQ, FOB, адрес, контакты), проверка юрлица и адреса, чек-лист отбора. English: China supplier search, sourcing, factory finder, 1688, Alibaba."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-china-sourcing — поставщики и закупки в Китае
@@ -10,6 +9,14 @@ allowed-tools: Bash(srezai *)
 Задача: из русского запроса собрать **кандидатов-поставщиков** с проверяемыми
 полями и честной пометкой достоверности. Не «найти поставщика», а «собрать
 кандидатов и показать, что о каждом известно и чем это подтверждено».
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `read_url`, `extract`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Порядок
 
@@ -56,4 +63,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

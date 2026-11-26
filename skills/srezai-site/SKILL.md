@@ -2,13 +2,20 @@
 name: srezai-site
 description: "Карта и обход сайта: разделы и адреса, объём, чтение раздела целиком, обход документации. Триггеры: «какие страницы на сайте», «обойди сайт», «собери раздел», «все события с агрегатора». English: site map, crawl website, sitemap, scrape section."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-site — карта сайта и обход раздела
 
 Сначала дешёвая карта, потом точечное чтение нужного раздела. Обход всего сайта
 «на всякий случай» — самая частая переплата.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`map`, `crawl`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Быстрый старт
 
@@ -95,4 +102,4 @@ srezai crawl https://docs.example.com --select-paths /api/ --limit 10
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

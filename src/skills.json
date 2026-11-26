@@ -15,7 +15,14 @@
       "tools": [
         "get_usage"
       ],
-      "order": 0
+      "order": 0,
+      "mcp_examples": [
+        "web_search",
+        "read_url",
+        "map",
+        "verify_claim"
+      ],
+      "call_table": "all"
     },
     {
       "name": "srezai-search",

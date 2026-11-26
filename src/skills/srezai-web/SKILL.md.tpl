@@ -2,7 +2,6 @@
 name: srezai-web
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-web — веб-доступ для агентов: точка входа
@@ -12,19 +11,7 @@ allowed-tools: Bash(srezai *)
 
 {{SKILL_ROUTER}}
 
-## Три канала — один и тот же API
-
-1. **CLI `srezai` (рекомендую):** в контексте только это описание, описания
-   инструментов не занимают место.
-   ```bash
-   {{CLI_EXAMPLE}}
-   ```
-2. **MCP `https://srezai.ru/api/mcp`:** когда консоли нет (Claude Desktop,
-   ChatGPT-коннекторы, n8n). Схемы 13 инструментов — ≈10,8 тыс. токенов в каждом
-   запросе, поэтому бери его только если CLI невозможен.
-3. **REST `https://srezai.ru/api/v1/*`:** свой клиент, Bearer-ключ.
-
-Подробнее — [references/channels.md](references/channels.md).
+{{HOW_TO_CALL}}
 
 ## Ключ, пробный режим, оплата
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Единственный источник правды: src/tools.json + src/skills.json.
-// Производные артефакты: skills/<имя>/SKILL.md, skills/<имя>/references/*.md,
-// .claude-plugin/plugin.json, .claude-plugin/marketplace.json, docs/tools.md,
-// блок в README.md, llms.txt, VERSION, SHA256SUMS.txt.
+// Производные артефакты: skills/<имя>/SKILL.md, skills/<имя>/references/*.md
+// (включая how-to-call.md — таблица «CLI → MCP → REST»), .claude-plugin/plugin.json,
+// .claude-plugin/marketplace.json, docs/tools.md, блок в README.md, llms.txt,
+// manifest.json, VERSION, SHA256SUMS.txt.
 //
 //   node scripts/generate.mjs          — пересобрать артефакты
 //   node scripts/generate.mjs --check  — ничего не писать, упасть при расхождении (для CI)
@@ -23,7 +24,7 @@ const die = (message) => {
 };
 
 // --- проверки источников ----------------------------------------------------
-const REQUIRED_TOOL = ["name", "purpose", "purpose_en", "price", "price_en", "key_params", "when_not", "cli", "output", "skill"];
+const REQUIRED_TOOL = ["name", "purpose", "purpose_en", "price", "price_en", "key_params", "when_not", "cli", "rest", "output", "skill"];
 const REQUIRED_SKILL = ["name", "title", "description", "kind"];
 const SKILL_KINDS = new Set(["toolset", "guide"]);
 const problems = [];
@@ -38,8 +39,19 @@ for (const tool of src.tools) {
     if (!tool[field] || String(tool[field]).trim() === "") problems.push(`${tool.name}: пустое поле ${field}`);
   }
   if (!Array.isArray(tool.notes) || tool.notes.length === 0) problems.push(`${tool.name}: нужен непустой notes[]`);
+  // REST-путь — часть контракта канала: «CLI → MCP → REST» в скиллах строится из него.
+  if (!/^(GET|POST) \/api\/v1\/[a-z]+$/.test(tool.rest)) {
+    problems.push(`${tool.name}: rest="${tool.rest}" — ожидается "POST /api/v1/<endpoint>" или "GET /api/v1/<endpoint>"`);
+  }
 }
 if (!/^\d+\.\d+\.\d+$/.test(src.version)) problems.push(`версия «${src.version}» не в формате semver`);
+if (!Array.isArray(src.call_examples) || src.call_examples.length === 0) {
+  problems.push("call_examples[] — примеры MCP-инструментов для скиллов без своих tools");
+} else {
+  for (const name of src.call_examples) {
+    if (!toolByName.has(name)) problems.push(`call_examples: неизвестный инструмент ${name}`);
+  }
+}
 
 const skillNames = new Set();
 const toolSkill = new Map();
@@ -61,6 +73,22 @@ for (const skill of cfg.skills) {
   }
   if (skill.user_invocable !== undefined && typeof skill.user_invocable !== "boolean") {
     problems.push(`${skill.name}: user_invocable должен быть boolean`);
+  }
+  // mcp_examples — какие MCP-инструменты назвать в блоке «Как позвать» в SKILL.md.
+  // call_table="all" — таблица каналов в references/how-to-call.md на все инструменты
+  // (для точки входа и руководств), иначе — только на свои tools навыка.
+  if (skill.mcp_examples !== undefined) {
+    if (skill.kind === "guide") problems.push(`${skill.name}: mcp_examples только для kind="toolset"`);
+    if (!Array.isArray(skill.mcp_examples) || skill.mcp_examples.length === 0) {
+      problems.push(`${skill.name}: mcp_examples должен быть непустым массивом`);
+    } else {
+      for (const name of skill.mcp_examples) {
+        if (!toolByName.has(name)) problems.push(`${skill.name}: mcp_examples — неизвестный инструмент ${name}`);
+      }
+    }
+  }
+  if (skill.call_table !== undefined && skill.call_table !== "all") {
+    problems.push(`${skill.name}: call_table="${skill.call_table}", допустимо только "all"`);
   }
   for (const toolName of tools) {
     if (!toolByName.has(toolName)) problems.push(`${skill.name}: неизвестный инструмент ${toolName}`);
@@ -121,6 +149,60 @@ const skillRouter = () =>
 
 const GUIDE_FORBIDDEN = ["TOOLS_SUMMARY", "TOOL_DETAILS", "CLI_EXAMPLE"];
 
+// --- «как позвать»: один вход, три канала -----------------------------------
+// Пакет отдаётся и самим MCP-сервером (Skills over MCP), и ставится отдельно,
+// поэтому в каждом навыке порядок один: MCP → CLI → REST. Блок генерируется, а не
+// копипастится в 10 шаблонов; таблица соответствия — в references/how-to-call.md.
+const cliBase = (tool) => tool.cli.split(/\s+/).slice(0, 2).join(" ");
+
+const callTools = (skill) => {
+  if (Array.isArray(skill.mcp_examples) && skill.mcp_examples.length > 0) return skill.mcp_examples;
+  if (skill.tools.length > 0) return skill.tools;
+  return src.call_examples;
+};
+
+const howToCall = (skill) =>
+  table([
+    "## Как позвать: MCP → CLI → REST",
+    "",
+    `1. **MCP** — если хост дал инструменты srezai (${callTools(skill).map((n) => `\`${n}\``).join(", ")}), зови их напрямую.`,
+    "2. **CLI** — есть shell и `srezai-cli`: `srezai …`.",
+    "3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.",
+    "",
+    "Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).",
+  ]);
+
+const channelsReference = (skill) => {
+  const tools = skill.call_table === "all" || skill.tools.length === 0 ? src.tools : skill.tools.map((name) => toolByName.get(name));
+  return table([
+    "# Как позвать: CLI, MCP, REST",
+    "",
+    "Один и тот же инструмент доступен тремя каналами. Выбирай по возможностям",
+    "хоста, порядок один: **MCP → CLI → REST**.",
+    "",
+    "1. **MCP.** Хост уже дал инструменты srezai — значит, он подключён к",
+    `   \`${src.server.mcp_url}\` с ключом (Claude Code, VS Code, ChatGPT-коннектор).`,
+    "   Зови инструмент по имени, ставить ничего не нужно. В этом режиме сервер",
+    "   отдаёт и сами навыки (Skills over MCP), поэтому отдельная установка пакета",
+    "   не обязательна.",
+    "2. **CLI.** Есть shell: `npx srezai-cli --help` или `npm i -g srezai-cli`,",
+    "   затем `srezai <команда>`. Контекст дешевле: схемы инструментов не грузятся.",
+    "3. **REST.** Есть только HTTP: `POST https://srezai.ru/api/v1/<endpoint>` с",
+    "   `Authorization: Bearer srz_live_…`, тело — JSON. Все эндпоинты — POST,",
+    "   кроме `GET /api/v1/whoami`; ответы совпадают с MCP.",
+    "",
+    "| CLI | MCP-инструмент | REST |",
+    "|---|---|---|",
+    ...tools.map((t) => `| \`${cliBase(t)}\` | \`${t.name}\` | \`${t.rest}\` |`),
+    "",
+    "Ключ — `SREZAI_API_KEY` или `~/.config/srezai/config.json` (chmod 600);",
+    "в чат, в файлы и в коммиты ключ не вставляй. Списания во всех каналах",
+    "одинаковые; MCP дополнительно занимает контекст схемами инструментов.",
+    "",
+    `<!-- сгенерировано из src/tools.json v${src.version} (${src.updated}); руками не править -->`,
+  ]);
+};
+
 // user-invocable: скилл без описания для модели, вызывается только человеком.
 // Флаг Claude-совместимый; остальные харнессы просто игнорируют ключ.
 const applyInvocation = (skillMd, skill) => {
@@ -132,6 +214,8 @@ const applyInvocation = (skillMd, skill) => {
 };
 
 const expand = (template, skill) => {
+  // Руководству не нужны per-tool блоки: инструментов у него нет. {{HOW_TO_CALL}}
+  // разрешён всем — это общий вход, а не привязка к собственным tools.
   if (skill.kind === "guide") {
     const forbidden = GUIDE_FORBIDDEN.filter((key) => template.includes(`{{${key}}}`));
     if (forbidden.length > 0) {
@@ -143,6 +227,7 @@ const expand = (template, skill) => {
     DESCRIPTION: JSON.stringify(skill.description),
     VERSION: src.version,
     SKILL_ROUTER: skillRouter(),
+    HOW_TO_CALL: howToCall(skill),
     TOOLS_SUMMARY: skill.tools.length > 0 ? toolsSummary(skill) : "",
     TOOL_DETAILS: skill.tools.map((name) => toolDetails(toolByName.get(name))).join("\n\n"),
     CLI_EXAMPLE: skill.tools.length > 0 ? toolByName.get(skill.tools[0]).cli : "",
@@ -186,7 +271,7 @@ const referenceDoc = (tool) =>
     "",
     "## Другие каналы",
     "",
-    `MCP: \`${tool.name}\` · REST: \`POST ${src.server.rest_base}/api/v1/*\` с Bearer-ключом.`,
+    `MCP: \`${tool.name}\` · REST: \`${tool.rest}\` (база ${src.server.rest_base}) с Bearer-ключом.`,
     "",
     `Скилл: [../SKILL.md](../SKILL.md) · оглавление: [../../../docs/tools.md](../../../docs/tools.md).`,
     "",
@@ -209,6 +294,17 @@ for (const skill of cfg.skills) {
   skillDirs.push(skillDir);
   pluginSkills.push(`./skills/${skill.name}`);
   artifacts.push({ path: join(skillDir, "SKILL.md"), content: skillMd });
+
+  // Общий вход во всех навыках: три канала и таблица «CLI → MCP → REST».
+  // Для точки входа и руководств — все инструменты, для остальных — свои.
+  const channels = channelsReference(skill);
+  if (channels.length > budget.extra_reference_chars) {
+    die(
+      `${skill.name}/references/how-to-call.md: ${channels.length} символов > ` +
+        `budget.extra_reference_chars (${budget.extra_reference_chars})`,
+    );
+  }
+  artifacts.push({ path: join(skillDir, "references", "how-to-call.md"), content: channels });
 
   for (const toolName of skill.tools) {
     const ref = referenceDoc(toolByName.get(toolName));
@@ -265,6 +361,17 @@ const reference = table([
     (t) => `| \`${t.name}\` | ${t.purpose} | ${t.price} | ${t.limit || "—"} | ${t.when_not} |`,
   ),
   "",
+  "## Каналы вызова",
+  "",
+  "Один инструмент — три входа: MCP (инструмент по имени), CLI `srezai …` (есть",
+  "shell), REST (только HTTP + Bearer). Навыки пакета работают через любой канал:",
+  "в `SKILL.md` порядок MCP → CLI → REST, полная таблица — в",
+  "`references/how-to-call.md` каждого скилла.",
+  "",
+  "| CLI | MCP | REST |",
+  "|---|---|---|",
+  ...src.tools.map((t) => `| \`${cliBase(t)}\` | \`${t.name}\` | \`${t.rest}\` |`),
+  "",
   "## Параметры",
   "",
   ...src.tools.map((t) => `- **\`${t.name}\`** — ${t.key_params}`),
@@ -276,6 +383,8 @@ const llms = table([
   "",
   `${src.tools.length} tools over MCP at ${src.server.mcp_url}; the same tools via CLI \`srezai\``,
   "(npm package `srezai-cli`, zero dependencies) and REST base " + src.server.rest_base + ".",
+  "The skills are served by the MCP server itself (Skills over MCP): connecting with a",
+  "key delivers them together with the tools, so installing this package is optional.",
   "Runet-first coverage, PDF, screenshots, site crawls, schema extraction, claim",
   "verification with quotes, synthesized answers and deep research.",
   "",
@@ -425,6 +534,7 @@ const manifestJson = JSON.stringify(
     version: src.version,
     repository: repositoryUrl,
     license: "Apache-2.0",
+    served_over_mcp: src.server.mcp_url,
     generated_from: ["src/tools.json", "src/skills.json", "src/skills/*/SKILL.md.tpl"],
     designed_for: {
       claude_code: ".claude-plugin/plugin.json",

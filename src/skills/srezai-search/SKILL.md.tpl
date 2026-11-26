@@ -2,13 +2,14 @@
 name: srezai-search
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-search — ссылки, факты, картинки
 
 Задача скилла: быстро найти источники. Полный текст — уже другой скилл
 (`srezai-read`), проверка факта — `srezai-research`.
+
+{{HOW_TO_CALL}}
 
 ## Быстрый старт
 

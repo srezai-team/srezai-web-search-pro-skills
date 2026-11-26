@@ -2,7 +2,6 @@
 name: srezai-eval
 description: "Воспроизводимая оценка качества поиска: датасет, манифест, ≥3 прогона, судья, p50/p95, учёт фейлов, отчёт «качество × цена × латентность». Вызывается человеком. Триггеры: «бенчмарк», «bake-off», «сравни провайдеров». English: search evaluation, benchmark, bake-off."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 disable-model-invocation: true
 ---
 
@@ -12,6 +11,14 @@ disable-model-invocation: true
 глубины/провайдеров на наших вопросах», «докажи, что стало лучше». Без такой
 просьбы не начинай: прогон стоит кредитов и времени. Первый шаг — согласовать
 бюджет и конфигурации, а не запустить цикл.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `read_url`, `extract`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## До прогона
 
@@ -75,4 +82,4 @@ disable-model-invocation: true
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

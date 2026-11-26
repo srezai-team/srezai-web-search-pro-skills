@@ -2,7 +2,6 @@
 name: srezai-web
 description: "Веб-доступ srezai: какой канал выбрать (CLI, MCP, REST), ключ и оплата, пробный режим, экономия кредитов, бюджет задачи, что делать с 401/402/429. Триггеры: «настрой srezai», «почему 401», «сколько потрачу». English: srezai setup, keys, billing, budget, credits."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-web — веб-доступ для агентов: точка входа
@@ -23,19 +22,13 @@ allowed-tools: Bash(srezai *)
 | [`srezai-eval`](../srezai-eval/SKILL.md) | воспроизводимая оценка качества поиска |
 | [`srezai-china-sourcing`](../srezai-china-sourcing/SKILL.md) | поставщики и закупки в Китае |
 
-## Три канала — один и тот же API
+## Как позвать: MCP → CLI → REST
 
-1. **CLI `srezai` (рекомендую):** в контексте только это описание, описания
-   инструментов не занимают место.
-   ```bash
-   srezai whoami (локально: есть ли ключ и куда ходит)
-   ```
-2. **MCP `https://srezai.ru/api/mcp`:** когда консоли нет (Claude Desktop,
-   ChatGPT-коннекторы, n8n). Схемы 13 инструментов — ≈10,8 тыс. токенов в каждом
-   запросе, поэтому бери его только если CLI невозможен.
-3. **REST `https://srezai.ru/api/v1/*`:** свой клиент, Bearer-ключ.
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `read_url`, `map`, `verify_claim`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
 
-Подробнее — [references/channels.md](references/channels.md).
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Ключ, пробный режим, оплата
 
@@ -86,4 +79,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.3. CLI `srezai` 0.1.1+; если старее — `npx srezai-cli@latest` (0.1.1 представляет серверу X-Client: по нему видно, каким скиллом сделан вызов).
+Скиллы 0.6.4. CLI `srezai` 0.1.1+; если старее — `npx srezai-cli@latest` (0.1.1 представляет серверу X-Client: по нему видно, каким скиллом сделан вызов).

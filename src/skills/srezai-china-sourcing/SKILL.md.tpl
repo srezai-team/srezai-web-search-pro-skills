@@ -2,7 +2,6 @@
 name: srezai-china-sourcing
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-china-sourcing — поставщики и закупки в Китае
@@ -10,6 +9,8 @@ allowed-tools: Bash(srezai *)
 Задача: из русского запроса собрать **кандидатов-поставщиков** с проверяемыми
 полями и честной пометкой достоверности. Не «найти поставщика», а «собрать
 кандидатов и показать, что о каждом известно и чем это подтверждено».
+
+{{HOW_TO_CALL}}
 
 ## Порядок
 

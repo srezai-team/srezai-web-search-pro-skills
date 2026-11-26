@@ -26,8 +26,8 @@ images[]: прямые ссылки и метаданные
 
 ## Другие каналы
 
-MCP: `image_search` · REST: `POST https://srezai.ru/api/v1/*` с Bearer-ключом.
+MCP: `image_search` · REST: `POST /api/v1/media` (база https://srezai.ru) с Bearer-ключом.
 
 Скилл: [../SKILL.md](../SKILL.md) · оглавление: [../../../docs/tools.md](../../../docs/tools.md).
 
-<!-- сгенерировано из src/tools.json v0.6.3 (2026-11-23); руками не править -->
+<!-- сгенерировано из src/tools.json v0.6.4 (2026-11-26); руками не править -->

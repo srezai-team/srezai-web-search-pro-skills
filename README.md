@@ -1,18 +1,36 @@
 # srezai skills — web access for AI agents, without burning the context
 
-Ten skills plus a zero-dependency CLI for the [srezai](https://srezai.ru) web API:
-six tool skills (web search, page reading, site maps and crawls, schema-based extraction,
-claim verification with quotes, answers, deep research, YouTube transcripts) and three
-guide skills (integration, migration, evaluation). Runet-first coverage.
+Ten skills for the [srezai](https://srezai.ru) web API: six tool skills (web search,
+page reading, site maps and crawls, schema-based extraction, claim verification with
+quotes, answers, deep research, YouTube transcripts) and four guide skills (China
+sourcing, integration, migration, evaluation). The same package ships three ways: the
+hosted MCP server serves the skills themselves (Skills over MCP), `npx skills add`
+installs them into any agent that reads `SKILL.md`, and the plugin manifests wire them
+into Claude Code, Codex, Cursor and Gemini CLI. Runet-first coverage.
 
-**Why skills + CLI.** An MCP server sends every tool schema in every request — for
-srezai that is ≈10.8k tokens (13 tools + instructions). These ten skill descriptions
-cost **≈730 tokens total** (o200k), and the CLI keeps tool schemas out of the context
-window: a typical task reads one skill (≈700–1,200 tokens) and one reference
-(≈300 tokens). MCP stays for hosts that have no shell: Claude Desktop, ChatGPT
-connectors, n8n.
+**Why skills.** Skills load on demand: a typical task reads one skill (≈700–1,200
+tokens) and one reference (≈300 tokens), while the MCP tool schemas cost ≈10.8k tokens
+in every request. Every skill works through whichever channel the host offers, in this
+order: **MCP tools srezai** (when the host already provides them — Claude Code, VS
+Code and ChatGPT connectors after connecting `https://srezai.ru/api/mcp`), **CLI
+`srezai …`** (when a shell and `srezai-cli` are available), **REST**
+`POST https://srezai.ru/api/v1/…` with a Bearer key (when only HTTP exists). Each
+skill links `references/how-to-call.md` with the CLI → MCP → REST table.
 
 ## Install
+
+### Nothing to install: skills over MCP
+
+The hosted MCP server serves these skills together with the tools (Skills over MCP).
+Connect it with your key and the agent gets both — no package install, no version drift:
+
+```json
+{"mcpServers": {"srezai": {"url": "https://srezai.ru/api/mcp",
+  "headers": {"Authorization": "Bearer srz_live_…"}}}}
+```
+
+Claude Code (public beta since 24.11.2026) and VS Code 1.147+ support the extension;
+hosts without it use one of the installs below.
 
 ### Skills (any agent that reads `SKILL.md`)
 
@@ -57,8 +75,9 @@ npx srezai-cli --help
 npm install -g srezai-cli
 ```
 
-The skills call `srezai ...` when a shell is available and fall back to MCP when it
-is not. CLI repo: [srezai-team/srezai-cli](https://github.com/srezai-team/srezai-cli).
+All ten skills are channel-agnostic and never assume the CLI: MCP tools first when the
+host provides them, `srezai …` when a shell is available, REST when only HTTP exists.
+CLI repo: [srezai-team/srezai-cli](https://github.com/srezai-team/srezai-cli).
 
 ### Key
 
@@ -159,8 +178,11 @@ method's limits are written down, not implied — see
 
 ## Security
 
-- Skills restrict themselves to `allowed-tools: Bash(srezai *)` where the host
-  supports it.
+- The skills declare no `allowed-tools`: the field is optional and experimental, it
+  names specific tools for host-side pre-approval (`Bash(srezai *)` is Claude
+  Code-specific syntax), and a skill that may run over MCP, CLI or REST cannot list
+  those tools portably. Permissions stay with the host; the skills only say which
+  channel to prefer and never request credentials.
 - The CLI has a fixed API host, never prints the key (only `srz_…abcd`), does not
   read local files and does not execute anything from arguments.
 - Skills contain no keys and no setup boilerplate duplication; channel setup lives in
@@ -177,6 +199,7 @@ scripts/generate.mjs      builds skills/, references, manifests, docs, VERSION, 
 scripts/eval/             reproducible quality harness (dry-run by default)
 docs/writing-skills.md   how to write skills for this repo (budgets, checks, anti-patterns)
 skills/<name>/SKILL.md    generated — do not edit by hand
+skills/<name>/references/ generated tool refs + how-to-call.md, hand-written depth
 .claude-plugin/           plugin.json + marketplace.json (generated)
 .codex-plugin/            Codex manifest (generated)
 .cursor-plugin/           Cursor manifest (generated)
@@ -204,4 +227,4 @@ SRZ_API_KEY=… node scripts/check-drift.mjs   # live MCP server still matches t
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md). Apache-2.0.
 
-Version 0.6.0.
+Version 0.6.4.

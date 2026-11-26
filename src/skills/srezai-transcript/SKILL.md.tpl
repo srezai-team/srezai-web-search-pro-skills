@@ -2,13 +2,14 @@
 name: srezai-transcript
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-transcript — субтитры и текст видео YouTube
 
 Ролик, конспект, точная цитата с таймкодом. Только YouTube: VK/Rutube и файлы
 видео не поддерживаются.
+
+{{HOW_TO_CALL}}
 
 ## Быстрый старт
 

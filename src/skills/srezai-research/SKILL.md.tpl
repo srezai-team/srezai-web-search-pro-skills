@@ -2,13 +2,14 @@
 name: srezai-research
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-research — проверка, готовый ответ, глубокое исследование
 
 Ступени синтеза: `search` → `answer` → `verify` → `deep`; начинай с дешёвой,
 что закрывает задачу.
+
+{{HOW_TO_CALL}}
 
 ## Быстрый старт
 
@@ -33,16 +34,11 @@ allowed-tools: Bash(srezai *)
 4. Цитаты дословные, уже сверены — используй их.
 
 ### Готовый ответ
-`answer --depth fast|balanced|deep` — 3/5/10 кредитов; это **черновик**,
-сверяй ссылки; список ссылок дешевле через `search`.
+`answer --depth fast|balanced|deep` — это **черновик**: сверяй ссылки.
 
 ### Исследование (талон)
-```bash
-srezai deep "тема" --async        # → талон (202)
-srezai deep status <ticket>       # опрос, дозабор бесплатный
-```
-Синхронный `deep` обрывается около 150-й секунды — для долгих тем только `--async`.
-Опрос по талону — с паузами, без цикла.
+`srezai deep "тема" --async` → талон (202); `srezai deep status <ticket>` — опрос
+с паузами, дозабор бесплатный. Синхронный `deep` обрывается ~на 150-й секунде.
 
 ## Когда остановиться
 
@@ -54,8 +50,7 @@ srezai deep status <ticket>       # опрос, дозабор бесплатн�
 
 ## Правила
 
-- `deep` и `verify` — последняя ступень: 8–20 кредитов; перед ними — бесплатный
-  `get_usage`.
+- `deep` и `verify` — последняя ступень; перед ними — бесплатный `get_usage`.
 - `unverified`/`mixed` — не факт. Ошибки —
   [errors.md](../srezai-web/references/errors.md), безопасность —
   [security.md](../srezai-web/references/security.md).

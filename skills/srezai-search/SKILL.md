@@ -2,13 +2,20 @@
 name: srezai-search
 description: "Поиск в вебе через srezai: ссылки, факты, сниппеты, свежие новости, картинки. Триггеры: «найди», «поищи в интернете», «какие источники», «новости за неделю». Полный текст страницы — srezai-read. English: web search, news search, images, links, scrape SERP."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-search — ссылки, факты, картинки
 
 Задача скилла: быстро найти источники. Полный текст — уже другой скилл
 (`srezai-read`), проверка факта — `srezai-research`.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `image_search`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Быстрый старт
 
@@ -82,4 +89,4 @@ srezai media "запрос" --num 3
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

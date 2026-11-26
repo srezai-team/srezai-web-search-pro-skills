@@ -2,7 +2,6 @@
 name: srezai-build
 description: "Интеграция srezai в код: каналы CLI/MCP/REST, ключ и Bearer, ошибки 401/402/429, таймауты, идемпотентность, примеры Node/Python/curl, чек-лист релиза. Триггеры: «встроить srezai», «SDK», «своя интеграция». English: srezai API integration, SDK, REST, MCP server, Claude Code, Codex."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-build — встроить srezai в продуктовый код
@@ -10,6 +9,14 @@ allowed-tools: Bash(srezai *)
 Скилл для разработчика: srezai вызывается из **вашего** сервиса, а не из чата.
 Чат-скиллы (`srezai-search`, `srezai-read`…) решают, *что* взять; здесь — *как*
 встроить: канал, ключ, ошибки, лимиты, деньги, релиз.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `read_url`, `extract`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Выбор канала
 
@@ -19,9 +26,9 @@ allowed-tools: Bash(srezai *)
 | MCP `https://srezai.ru/api/mcp` | продукт уже MCP-клиент (чат-хост, n8n) | JSON-RPC и сессию; ≈10,8 тыс. токенов схем |
 | CLI `srezai` | smoke-тест, CI, ручной прогон | процесс на операцию — не для горячего пути |
 
-В сервисе — REST; MCP только если хост сам умеет MCP; CLI не оборачивай в
-прод-цикл и не смешивай каналы: это разные транспорты одного биллинга. Подробнее
-о каналах — [../srezai-web/references/channels.md](../srezai-web/references/channels.md).
+В сервисе — REST; MCP — только если хост сам MCP-клиент; CLI не оборачивай в
+прод-цикл: это разные транспорты одного биллинга. Каналы —
+[../srezai-web/references/channels.md](../srezai-web/references/channels.md).
 
 ## Ключ
 
@@ -64,8 +71,7 @@ IP (`X-Srezai-Mode: trial`); для прода это не замена ключ
 `get_usage`. По инструментам:
 `read_urls`/`extract` ≤10 ссылок, `web_search` ≤30 результатов, `map` ≤200
 адресов, `crawl` ≤20 страниц, `yt_srt` ≤5 роликов, `verify_claim` 2–5
-источников, окно `read_url` 200–50 000 символов. Батчи режь по этим границам,
-длинное читай окнами (`meta.nextOffset`).
+источников, окно `read_url` 200–50 000 символов.
 
 ## Что писать в коде
 
@@ -84,4 +90,4 @@ IP (`X-Srezai-Mode: trial`); для прода это не замена ключ
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.

@@ -2,6 +2,8 @@
 
 13 tools over MCP at https://srezai.ru/api/mcp; the same tools via CLI `srezai`
 (npm package `srezai-cli`, zero dependencies) and REST base https://srezai.ru.
+The skills are served by the MCP server itself (Skills over MCP): connecting with a
+key delivers them together with the tools, so installing this package is optional.
 Runet-first coverage, PDF, screenshots, site crawls, schema extraction, claim
 verification with quotes, synthesized answers and deep research.
 
@@ -47,4 +49,4 @@ npx skills add srezai-team/srezai-web-search-pro-skills
 - yt_srt: YouTube video text: transcripts, summaries, quotes. Price: 1 credit per video; 15 with speaker labeling.
 - get_usage: Check balance, remaining quota, spend and the price list. Price: free; does not use the quota.
 
-Generated from src/tools.json v0.6.3.
+Generated from src/tools.json v0.6.4.

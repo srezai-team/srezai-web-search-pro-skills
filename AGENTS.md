@@ -23,9 +23,10 @@ src/skills.json             skills: name, kind, title, description, tools, order
 src/skills/<name>/SKILL.md.tpl      per-skill prose with {{PLACEHOLDERS}}
 src/skills/<name>/references/*.md   extra reference docs, copied verbatim
         ↓  node scripts/generate.mjs
-skills/<name>/SKILL.md, skills/<name>/references/*.md, .claude-plugin/*,
-.codex-plugin/*, .cursor-plugin/*, gemini-extension.json, manifest.json,
-docs/tools.md, llms.txt, VERSION, SHA256SUMS.txt
+skills/<name>/SKILL.md, skills/<name>/references/*.md (включая генерируемый
+how-to-call.md — таблица «CLI → MCP → REST»), .claude-plugin/*, .codex-plugin/*,
+.cursor-plugin/*, gemini-extension.json, manifest.json, docs/tools.md, llms.txt,
+VERSION, SHA256SUMS.txt
 ```
 
 Editing `skills/**` by hand is a bug: the next `generate` overwrites it and CI fails.
@@ -47,7 +48,8 @@ Before you finish: `node scripts/generate.mjs && bash scripts/selftest.sh`.
 - `toolset` — the skill owns tools from `src/tools.json`. Every tool belongs to exactly one
   skill; the generator enforces it.
 - `guide` — a how-to skill with no tools of its own (`tools: []`). Its template may use only
-  `{{DESCRIPTION}}`, `{{VERSION}}`, `{{SKILL_ROUTER}}`. Tool placeholders make generation fail.
+  `{{DESCRIPTION}}`, `{{VERSION}}`, `{{SKILL_ROUTER}}`, `{{HOW_TO_CALL}}`. Tool
+  placeholders make generation fail.
 
 ## Budgets are gates, not suggestions
 
@@ -61,8 +63,10 @@ the budget silently.
 
 - Body: dense, imperative, Russian with English trigger words in `description` (the
   description is the context pointer — front-load what triggers it, one branch per trigger).
-- Put every factual claim about a tool, price, limit or error code where it belongs:
-  `src/tools.json`. Never invent parameters.
+- Put every factual claim about a tool, price, limit, REST endpoint or error code where it
+  belongs: `src/tools.json`. Never invent parameters. `{{HOW_TO_CALL}}` and
+  `references/how-to-call.md` are generated from that file — do not write the three
+  channels by hand in a template.
 - `references/` is for depth the body does not need on every run (long procedures, failure
   tables, worked examples). Link it from the body with a relative path.
 - Cross-skill links are sibling-relative: `../srezai-web/references/security.md`.

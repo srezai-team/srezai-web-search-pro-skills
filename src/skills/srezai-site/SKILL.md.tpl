@@ -2,13 +2,14 @@
 name: srezai-site
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-site — карта сайта и обход раздела
 
 Сначала дешёвая карта, потом точечное чтение нужного раздела. Обход всего сайта
 «на всякий случай» — самая частая переплата.
+
+{{HOW_TO_CALL}}
 
 ## Быстрый старт
 

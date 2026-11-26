@@ -2,7 +2,6 @@
 name: srezai-migrate
 description: {{DESCRIPTION}}
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-migrate — переезд с другого провайдера на srezai
@@ -10,6 +9,8 @@ allowed-tools: Bash(srezai *)
 Замена веб-провайдера в существующем коде. Главное: srezai — не клон SERP-API и
 не платформа мониторинга. Сначала сверь, что именно вы используете, и не тащи
 через границу то, чего у нас нет.
+
+{{HOW_TO_CALL}}
 
 ## Соответствие инструментов
 

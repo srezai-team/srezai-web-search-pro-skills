@@ -1,6 +1,6 @@
 # Инструменты srezai — справочник
 
-> Сгенерировано из `src/tools.json` (версия 0.6.3, 2026-11-23). Руками не править:
+> Сгенерировано из `src/tools.json` (версия 0.6.4, 2026-11-26). Руками не править:
 > правка источника + `node scripts/generate.mjs`.
 
 MCP: `https://srezai.ru/api/mcp` · REST: `https://srezai.ru` · доки: https://srezai.ru/docs/mcp
@@ -20,6 +20,29 @@ MCP: `https://srezai.ru/api/mcp` · REST: `https://srezai.ru` · доки: https
 | `deep_research` | Многошаговое исследование темы с готовым ответом и источниками | 20 кредитов + 3 за каждую 1000 output-токенов | обычно 3–10 минут, до 42 | нужен один факт или список ссылок — это web_search |
 | `yt_srt` | Текст ролика YouTube: субтитры, конспект, цитата | 1 кредит за ролик; 15 — с разметкой по спикерам | ≤5 роликов за вызов, окно по from/to, таймкоды, до 200 тыс. символов на ролик — длинный ролик приходит целиком | нужны видео с других площадок (VK, Rutube) — их нет; или нужен сам файл видео; для настоящего разделения по голосу speakers не подходит — это разметка по смыслу реплик |
 | `get_usage` | Баланс, остаток квоты, расход и прайс | бесплатно, квоту не расходует | — | не нужен перед каждым вызовом |
+
+## Каналы вызова
+
+Один инструмент — три входа: MCP (инструмент по имени), CLI `srezai …` (есть
+shell), REST (только HTTP + Bearer). Навыки пакета работают через любой канал:
+в `SKILL.md` порядок MCP → CLI → REST, полная таблица — в
+`references/how-to-call.md` каждого скилла.
+
+| CLI | MCP | REST |
+|---|---|---|
+| `srezai search` | `web_search` | `POST /api/v1/search` |
+| `srezai media` | `image_search` | `POST /api/v1/media` |
+| `srezai read` | `read_url` | `POST /api/v1/read` |
+| `srezai read` | `read_urls` | `POST /api/v1/read` |
+| `srezai extract` | `extract` | `POST /api/v1/extract` |
+| `srezai fetch` | `fetch_page` | `POST /api/v1/fetch` |
+| `srezai map` | `map` | `POST /api/v1/map` |
+| `srezai crawl` | `crawl` | `POST /api/v1/crawl` |
+| `srezai verify` | `verify_claim` | `POST /api/v1/verify` |
+| `srezai answer` | `answer_search` | `POST /api/v1/answer` |
+| `srezai deep` | `deep_research` | `POST /api/v1/deep` |
+| `srezai transcript` | `yt_srt` | `POST /api/v1/transcript` |
+| `srezai whoami` | `get_usage` | `GET /api/v1/whoami` |
 
 ## Параметры
 

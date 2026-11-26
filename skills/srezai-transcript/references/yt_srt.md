@@ -27,8 +27,8 @@ results[]: текст/сегменты, credits, meta; слишком длинн
 
 ## Другие каналы
 
-MCP: `yt_srt` · REST: `POST https://srezai.ru/api/v1/*` с Bearer-ключом.
+MCP: `yt_srt` · REST: `POST /api/v1/transcript` (база https://srezai.ru) с Bearer-ключом.
 
 Скилл: [../SKILL.md](../SKILL.md) · оглавление: [../../../docs/tools.md](../../../docs/tools.md).
 
-<!-- сгенерировано из src/tools.json v0.6.3 (2026-11-23); руками не править -->
+<!-- сгенерировано из src/tools.json v0.6.4 (2026-11-26); руками не править -->

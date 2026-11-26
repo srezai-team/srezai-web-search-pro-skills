@@ -2,7 +2,6 @@
 name: srezai-migrate
 description: "Переезд на srezai с Tavily, Firecrawl, Exa или SerpAPI: таблица соответствия инструментов, чего у нас нет, grep остатков, чек-лист миграции. Триггеры: «переезд с Tavily», «заменить Firecrawl», «switch provider». English: migrate from Tavily, Firecrawl, Exa, SerpAPI, switch provider."
 license: Apache-2.0
-allowed-tools: Bash(srezai *)
 ---
 
 # srezai-migrate — переезд с другого провайдера на srezai
@@ -10,6 +9,14 @@ allowed-tools: Bash(srezai *)
 Замена веб-провайдера в существующем коде. Главное: srezai — не клон SERP-API и
 не платформа мониторинга. Сначала сверь, что именно вы используете, и не тащи
 через границу то, чего у нас нет.
+
+## Как позвать: MCP → CLI → REST
+
+1. **MCP** — если хост дал инструменты srezai (`web_search`, `read_url`, `extract`), зови их напрямую.
+2. **CLI** — есть shell и `srezai-cli`: `srezai …`.
+3. **REST** — только HTTP: `POST https://srezai.ru/api/v1/…` с `Authorization: Bearer srz_live_…`.
+
+Каналы и таблица — [references/how-to-call.md](references/how-to-call.md).
 
 ## Соответствие инструментов
 
@@ -74,4 +81,4 @@ allowed-tools: Bash(srezai *)
 
 ## Версия
 
-Скиллы 0.6.3.
+Скиллы 0.6.4.
