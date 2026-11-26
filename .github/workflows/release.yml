@@ -15,12 +15,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Тег ставят только на проверенный main, но проверка дешёвая: лучше
+      # упасть здесь, чем выпустить релиз, разъехавшийся с src/.
+      - name: Пакет не разъехался
+        run: |
+          node scripts/generate.mjs --check
+          bash scripts/selftest.sh
+
+      # skills.zip — тот же архив, что сайт отдаёт по /skills.zip. Собирается
+      # из тега, а не руками: версия сверяется с тегом, состав и sha256 каждого
+      # SKILL.md — с manifest.json. Скрипт кладётся в пакет из
+      # fixes-2026-11-26/site/build-skills-zip.mjs.
+      - name: Собрать skills.zip
+        run: node scripts/build-skills-zip.mjs --src . --expect "${GITHUB_REF_NAME#v}" --out dist/skills.zip
+
       - name: GitHub Release из тега
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -f RELEASE-NOTES.md ]; then
-            gh release create "$GITHUB_REF_NAME" --title "srezai skills $GITHUB_REF_NAME" --notes-file RELEASE-NOTES.md
+            gh release create "$GITHUB_REF_NAME" --title "srezai skills $GITHUB_REF_NAME" --notes-file RELEASE-NOTES.md dist/skills.zip dist/skills.zip.sha256
           else
-            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes dist/skills.zip dist/skills.zip.sha256
           fi
